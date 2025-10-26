@@ -1,5 +1,6 @@
 import { type ReactNode } from 'react';
 import { Navigation } from './Navigation';
+import { Link } from "react-router-dom";
 
 interface LayoutProps {
     children: ReactNode;
@@ -14,9 +15,9 @@ export function Layout({ children }: LayoutProps) {
                         <div className="flex items-center gap-4">
                             <div className="flex items-center">
                                 {/* Logo */}
-                                <a href="/" className="flex items-center">
+                                <Link to="/" className="flex items-center">
                                     <span className="text-2xl font-bold text-orange-600">UP648</span>
-                                </a>
+                                </Link>
                             </div>
                             {/* Navigation */}
                             <div className="hidden md:block">
