@@ -11,16 +11,20 @@ const Data = lazy(() => import('./pages/Data'));
 
 function App() {
   return (
-    <Router>
+    // 👇 Important: add basename for GitHub Pages
+    <Router basename="/up648">
       <Layout>
         <Suspense fallback={<div>Loading...</div>}>
           <Routes>
-            <Route path="/" element={<Navigate to="/board" replace />} />
-            <Route path="/board" element={<Board />} />
-            <Route path="/backlog" element={<Backlog />} />
-            <Route path="/map" element={<Map />} />
-            <Route path="/overview" element={<Overview />} />
-            <Route path="/data" element={<Data />} />
+            {/* 👇 Remove the leading slash so it respects basename */}
+            <Route path="/" element={<Navigate to="board" replace />} />
+            <Route path="board" element={<Board />} />
+            <Route path="backlog" element={<Backlog />} />
+            <Route path="map" element={<Map />} />
+            <Route path="overview" element={<Overview />} />
+            <Route path="data" element={<Data />} />
+            {/* 👇 Optional: catch-all to redirect unknown paths */}
+            <Route path="*" element={<Navigate to="board" replace />} />
           </Routes>
         </Suspense>
       </Layout>
