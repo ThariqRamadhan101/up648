@@ -1,36 +1,6 @@
-import { useState } from 'react';
-import { useStore } from '../store/store';
-import { ProvinceChart } from '../components/data/ProvinceChart';
 import { IndicatorForm } from '../components/data/IndicatorForm';
 
-type Tab = 'economics' | 'infrastructure' | 'education';
-
-type SortState = {
-    gdp: boolean;
-    unemployment: boolean;
-    poverty: boolean;
-    infrastructure: boolean;
-    urbanization: boolean;
-    internet: boolean;
-    literacy: boolean;
-    enrollment: boolean;
-    teacherRatio: boolean;
-};
-
 function Data() {
-    const { provinces } = useStore();
-    const [activeTab, setActiveTab] = useState<Tab>('economics');
-    const [chartSort, setChartSort] = useState<SortState>({
-        gdp: false,
-        unemployment: false,
-        poverty: false,
-        infrastructure: false,
-        urbanization: false,
-        internet: false,
-        literacy: false,
-        enrollment: false,
-        teacherRatio: false
-    });
 
     return (
         <div className="space-y-6">

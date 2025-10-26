@@ -19,7 +19,7 @@ type SortState = {
 export default function Overview() {
     const { provinces, tasks } = useStore();
     const [activeTab, setActiveTab] = useState<Tab>('economics');
-    const [chartSort, setChartSort] = useState<SortState>({
+    const [chartSort, _] = useState<SortState>({
         gdp: false,
         unemployment: false,
         poverty: false,
@@ -175,8 +175,8 @@ export default function Overview() {
                         <button
                             onClick={() => setActiveTab('economics')}
                             className={`px-4 py-2 text-sm font-medium rounded-lg ${activeTab === 'economics'
-                                    ? 'bg-sekolah-100 text-sekolah-900'
-                                    : 'text-gray-500 hover:text-gray-900 hover:bg-gray-50'
+                                ? 'bg-sekolah-100 text-sekolah-900'
+                                : 'text-gray-500 hover:text-gray-900 hover:bg-gray-50'
                                 }`}
                         >
                             Economics
@@ -184,8 +184,8 @@ export default function Overview() {
                         <button
                             onClick={() => setActiveTab('infrastructure')}
                             className={`px-4 py-2 text-sm font-medium rounded-lg ${activeTab === 'infrastructure'
-                                    ? 'bg-sekolah-100 text-sekolah-900'
-                                    : 'text-gray-500 hover:text-gray-900 hover:bg-gray-50'
+                                ? 'bg-sekolah-100 text-sekolah-900'
+                                : 'text-gray-500 hover:text-gray-900 hover:bg-gray-50'
                                 }`}
                         >
                             Infrastructure
@@ -193,8 +193,8 @@ export default function Overview() {
                         <button
                             onClick={() => setActiveTab('education')}
                             className={`px-4 py-2 text-sm font-medium rounded-lg ${activeTab === 'education'
-                                    ? 'bg-sekolah-100 text-sekolah-900'
-                                    : 'text-gray-500 hover:text-gray-900 hover:bg-gray-50'
+                                ? 'bg-sekolah-100 text-sekolah-900'
+                                : 'text-gray-500 hover:text-gray-900 hover:bg-gray-50'
                                 }`}
                         >
                             Education
