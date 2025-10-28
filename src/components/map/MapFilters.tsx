@@ -4,6 +4,8 @@ import { useTaskFilters } from '../../store/hooks';
 import { cn } from '../../utils/cn';
 
 export const overlayOptions = [
+    { id: 'icor2024', name: 'ICOR 2024' },
+    { id: 'icor2025', name: 'ICOR 2025' },
     { id: 'gdp', name: 'GDP Growth' },
     { id: 'unemployment', name: 'Unemployment Rate' },
     { id: 'poverty', name: 'Poverty Rate' },

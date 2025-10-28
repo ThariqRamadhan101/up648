@@ -36,8 +36,10 @@ export function ProvinceChart({
             sortAscending ? getValue(a) - getValue(b) : getValue(b) - getValue(a)
         );
 
-        // Find max value for scaling
-        const maxValue = Math.max(...provinces.map(getValue));
+        // Find max and average values for scaling/reference
+        const values = provinces.map(getValue);
+        const maxValue = Math.max(...values, 1);
+        const avgValue = values.reduce((a, b) => a + b, 0) / Math.max(values.length, 1);
         const scale = (canvas.height - 60) / maxValue; // Leave space for labels
 
         // Draw bars
@@ -121,6 +123,22 @@ export function ProvinceChart({
             }
         });
 
+        // Draw average reference line and label
+        const avgY = canvas.height - 30 - avgValue * scale;
+        ctx.save();
+        ctx.strokeStyle = '#6b7280'; // gray-500
+        ctx.setLineDash([6, 4]);
+        ctx.beginPath();
+        ctx.moveTo(20, avgY);
+        ctx.lineTo(canvas.width - 20, avgY);
+        ctx.stroke();
+        ctx.setLineDash([]);
+        ctx.fillStyle = '#374151'; // gray-700
+        ctx.font = '11px Inter, system-ui, sans-serif';
+        ctx.textAlign = 'right';
+        ctx.fillText(`Avg: ${formatValue(avgValue)}`, canvas.width - 24, Math.max(12, avgY - 6));
+        ctx.restore();
+
         return () => {
             canvas.removeEventListener('mousemove', handleMouseMove);
         };
@@ -128,6 +146,7 @@ export function ProvinceChart({
 
     return (
         <div className={className}>
+            <div className="mb-2 text-sm font-medium text-gray-900">{metric}</div>
             <canvas
                 ref={canvasRef}
                 width={800}

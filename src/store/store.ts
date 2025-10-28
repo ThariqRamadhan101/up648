@@ -1,6 +1,7 @@
 import { create } from 'zustand';
 import { type Task, type Province } from '../types';
 import { mockTasks, mockProvinces, mockProjects } from './mockData';
+import { provinceCoordinates } from '../data/provinces';
 
 interface FilterState {
     project: string | null;
@@ -8,6 +9,7 @@ interface FilterState {
     creator: string | null;
     sprint: string | null;
     overlays: string[];
+    title: string | null;
 }
 
 interface TaskStore {
@@ -42,12 +44,49 @@ const defaultFilters: FilterState = {
     creator: null,
     sprint: null,
     overlays: [],
+    title: null,
 };
 
 export const useStore = create<TaskStore>((set, get) => ({
     // Initial Data
     tasks: mockTasks,
-    provinces: mockProvinces,
+    provinces: (() => {
+        const base = mockProvinces.map((p) => ({
+            ...p,
+            indicators: {
+                ...p.indicators,
+                icor2024: (p as any).indicators.icor2024 ?? 5,
+                icor2025: (p as any).indicators.icor2025 ?? 4.8,
+            },
+        }));
+        const existing = new Set(base.map(p => p.id));
+        const titleCase = (s: string) => s.replace(/_/g, ' ').replace(/\b\w/g, c => c.toUpperCase());
+        const placeholders: Province[] = [] as any;
+        Object.entries(provinceCoordinates).forEach(([id, coords]) => {
+            if (!existing.has(id)) {
+                placeholders.push({
+                    id,
+                    name: titleCase(id),
+                    code: id.slice(0, 2).toUpperCase(),
+                    coordinates: coords as any,
+                    indicators: {
+                        gdp: 5,
+                        unemployment: 5,
+                        povertyRate: 10,
+                        infrastructureIndex: 70,
+                        urbanizationRate: 50,
+                        internetAccess: 75,
+                        literacyRate: 98,
+                        schoolEnrollment: 93,
+                        teacherRatio: 16,
+                        icor2024: 5,
+                        icor2025: 4.8,
+                    },
+                } as Province);
+            }
+        });
+        return [...base, ...placeholders];
+    })(),
     projects: mockProjects,
     filters: defaultFilters,
 
@@ -105,11 +144,23 @@ export const useStore = create<TaskStore>((set, get) => ({
 
     updateTask: (taskId, updates) => {
         set((state) => ({
-            tasks: state.tasks.map((task) =>
-                task.id === taskId
-                    ? { ...task, ...updates, updatedAt: new Date() }
-                    : task
-            ),
+            tasks: state.tasks.map((task) => {
+                if (task.id !== taskId) return task;
+                const now = new Date();
+                const newTask = { ...task, ...updates, updatedAt: now } as Task;
+                const logs = [] as NonNullable<Task['budgetLogs']>;
+                const note = (updates as any).budgetNote as string | undefined;
+                if (typeof updates.budgetTotal === 'number' && updates.budgetTotal !== task.budgetTotal) {
+                    logs.push({ at: now, field: 'budgetTotal', from: task.budgetTotal, to: updates.budgetTotal, note });
+                }
+                if (typeof updates.budgetAbsorbed === 'number' && updates.budgetAbsorbed !== task.budgetAbsorbed) {
+                    logs.push({ at: now, field: 'budgetAbsorbed', from: task.budgetAbsorbed, to: updates.budgetAbsorbed, note });
+                }
+                if (logs.length > 0) {
+                    newTask.budgetLogs = [...(task.budgetLogs || []), ...logs];
+                }
+                return newTask;
+            }),
         }));
     },
 
@@ -142,6 +193,7 @@ export const useStore = create<TaskStore>((set, get) => ({
             if (filters.province && task.province !== filters.province) return false;
             if (filters.creator && task.creator !== filters.creator) return false;
             if (filters.sprint && task.sprint !== filters.sprint) return false;
+            if (filters.title && !task.title.toLowerCase().includes(String(filters.title).toLowerCase())) return false;
             return true;
         });
     },

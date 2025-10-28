@@ -30,13 +30,13 @@ export function Layout({ children }: LayoutProps) {
 
             {/* Mobile Navigation */}
             <div className="border-b bg-white md:hidden">
-                <div className="w-full px-4 sm:px-6 lg:px-8">
+                <div className="w-full px-2 sm:px-4 lg:px-6">
                     <Navigation />
                 </div>
             </div>
 
             {/* Main Content */}
-            <main className="flex-grow p-6">
+            <main className="flex-grow px-2 py-4 sm:px-4 lg:px-6">
                 <div className="w-full h-full">
                     {children}
                 </div>
@@ -44,9 +44,9 @@ export function Layout({ children }: LayoutProps) {
 
             {/* Footer */}
             <footer className="border-t bg-white">
-                <div className="w-full px-4 py-4 sm:px-6 lg:px-8">
+                <div className="w-full px-2 py-4 sm:px-4 lg:px-6">
                     <p className="text-center text-sm text-gray-500">
-                        UP648 - Unified Platform Geospatial Agile Board
+                        UP648 - Unified Platform Geospatial Agile Board by PS6 PRO MAX
                     </p>
                 </div>
             </footer>

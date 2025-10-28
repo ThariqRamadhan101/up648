@@ -7,7 +7,18 @@ export function BoardFilters() {
     const { filters, setFilter, resetFilters, projects, provinces } = useTaskFilters();
 
     return (
-        <div className="flex flex-wrap gap-4 mb-6">
+        <div className="flex flex-wrap items-center gap-4 mb-6">
+            {/* Title Search */}
+            <div className="min-w-[240px]">
+                <input
+                    type="text"
+                    placeholder="Search by title..."
+                    defaultValue={filters.title ?? ''}
+                    onChange={(e) => setFilter('title', e.target.value || null)}
+                    className="w-full rounded-lg bg-white py-2 px-3 text-sm border focus:outline-none focus-visible:border-orange-500 focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75 focus-visible:ring-offset-2 focus-visible:ring-offset-orange-300"
+                />
+            </div>
+
             {/* Project Filter */}
             <div className="min-w-[200px]">
                 <Listbox value={filters.project} onChange={(v) => setFilter('project', v)}>

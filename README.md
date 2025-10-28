@@ -1,73 +1,85 @@
-# React + TypeScript + Vite
+# up648 — Infrastructure Project Monitoring Dashboard
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Modern dashboard to track provincial infrastructure projects, task progress, and budgets with construction monitoring and S-curve review.
 
-Currently, two official plugins are available:
+## Overview
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+This app provides:
+- AI-inspired summaries of projects and provinces needing attention.
+- Indicator summary cards linking to detailed charts (GDP, Unemployment, Poverty, Infrastructure, etc.).
+- Task board details with a rich Task Modal for budget and construction updates.
+- Recent budget change logs aggregated across tasks.
 
-## React Compiler
+## Key Features
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- Task Modal
+  - Budget absorption display and quick log input (auto-logged to `budgetLogs`).
+  - Construction Monitoring Update (S-curve related):
+    - Planned vs Actual progress (%), variance badge.
+    - Status (On track/At risk/Delayed).
+    - Key activities, Issues/risks.
+    - Next milestone and expected date.
+    - Evidence file upload.
+  - S-Curve image sections:
+    - Financial Plan and Physical Plan uploads with live preview.
+    - Mock SVG preview shown when no image is uploaded.
+  - Budget logs list at the bottom of the modal.
+  - Scrollable content (max 85vh).
 
-## Expanding the ESLint configuration
+- Overview Page
+  - AI Recommendations (full-width card) for quick insights.
+  - Two-column layout:
+    - Left: Indicator Summary card.
+    - Left: Recent Budget Changes card (Show more/less pagination).
+    - Right: Province Performance Charts stacked vertically.
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## Tech Stack
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+- React + TypeScript + Vite
+- State: Zustand (`src/store/store.ts`)
+- Styling: Tailwind CSS (`cn` utility in `src/utils/cn.ts`)
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+## Getting Started
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+1. Install
+   - `npm install`
+2. Develop
+   - `npm run dev`
+   - Open the local URL shown in the terminal.
+3. Build
+   - `npm run build`
+4. Preview
+   - `npm run preview`
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## Project Structure (highlights)
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+- `src/pages/Overview.tsx`
+  - AI Recommendations, Indicator Summary, Budget Changes, Charts.
+- `src/components/board/TaskCard.tsx`
+  - Compact task display used in boards/lists.
+- `src/components/board/TaskModal.tsx`
+  - Detailed task view. Includes budget absorption update, construction monitoring form, S-curve image areas, and budget logs.
+- `src/store/store.ts`
+  - Zustand store; `updateTask` automatically appends to `budgetLogs` when `budgetTotal` or `budgetAbsorbed` changes (note supported via `budgetNote`).
+- `src/store/mockData.ts`
+  - Seeds example tasks, including example `budgetLogs` for demos.
+- `src/types/index.ts`
+  - Core types, including `Task` and optional `budgetLogs`.
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+## Data & Logging
+
+- Budget changes are auto-logged as entries in `task.budgetLogs` with fields:
+  - `at` (Date), `field` (`budgetTotal` | `budgetAbsorbed`), `from`, `to`, optional `note`.
+- The Overview page aggregates and paginates these logs in “Recent Budget Changes.”
+
+## Notes
+
+- Task Modal content is scrollable. Close button is in the top-right; logs are at the bottom.
+- S-curve uploads are kept in component state for preview. Persisting them to a backend or store can be added.
+- Construction Monitoring form currently resets on save; hook it to a store or API to persist.
+
+## Roadmap
+
+- Persist S-curve images and monitoring updates per task.
+- Add filters (province/project) to Budget Changes panel.
+- Collapsible sections and sticky modal header for long content.

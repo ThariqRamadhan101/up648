@@ -15,6 +15,7 @@ import { TaskCard } from '../components/board/TaskCard';
 import { BoardFilters } from '../components/board/BoardFilters';
 import type { Task } from '../types';
 import { createPortal } from 'react-dom';
+import { TaskModal } from '../components/board/TaskModal';
 
 const columns = [
     { id: 'backlog', title: 'Backlog' },
@@ -29,6 +30,8 @@ const columns = [
 
 export default function Board() {
     const [activeId, setActiveId] = useState<string | null>(null);
+    const [selectedTask, setSelectedTask] = useState<Task | null>(null);
+
     const sensors = useSensors(
         useSensor(PointerSensor, {
             activationConstraint: {
@@ -40,6 +43,10 @@ export default function Board() {
     const tasks = useStore((state) => state.getFilteredTasks());
     const moveTask = useStore((state) => state.moveTask);
     const activeTask = activeId ? tasks.find((t) => t.id === activeId) : null;
+
+    function handleTaskClick(task: Task) {
+        setSelectedTask(task);
+    }
 
     function handleDragStart(event: DragStartEvent) {
         setActiveId(event.active.id as string);
@@ -75,16 +82,24 @@ export default function Board() {
                                 title={column.title}
                                 stage={column.id}
                                 tasks={tasks.filter((task) => task.stage === column.id)}
+                                onTaskClick={handleTaskClick}
                             />
                         ))}
                     </SortableContext>
-                </div>                {createPortal(
+                </div>
+                {createPortal(
                     <DragOverlay>
                         {activeTask && <TaskCard task={activeTask} />}
                     </DragOverlay>,
                     document.body
                 )}
             </DndContext>
+            {selectedTask && (
+                <TaskModal
+                    task={selectedTask}
+                    onClose={() => setSelectedTask(null)}
+                />
+            )}
         </div>
     );
 }

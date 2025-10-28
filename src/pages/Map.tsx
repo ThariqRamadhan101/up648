@@ -80,6 +80,12 @@ function Map() {
         case 'teacherRatio':
           details["Teacher Ratio"] = `1:${indicators.teacherRatio.toFixed(1)}`;
           break;
+        case 'icor2024':
+          details["ICOR 2024"] = `${(indicators as any).icor2024?.toFixed ? (indicators as any).icor2024.toFixed(2) : (indicators as any).icor2024 ?? '-'} `;
+          break;
+        case 'icor2025':
+          details["ICOR 2025"] = `${(indicators as any).icor2025?.toFixed ? (indicators as any).icor2025.toFixed(2) : (indicators as any).icor2025 ?? '-'} `;
+          break;
       }
     });
 
@@ -95,12 +101,68 @@ function Map() {
         case 'literacy': return indicators.literacyRate;
         case 'enrollment': return indicators.schoolEnrollment;
         case 'teacherRatio': return Math.max(0, Math.min(100, (30 - indicators.teacherRatio) * 5));
+        case 'icor2024': return (indicators as any).icor2024 ?? 0;
+        case 'icor2025': return (indicators as any).icor2025 ?? 0;
         default: return calculateProvinceProgress(provinceId, tasks);
       }
     })() : calculateProvinceProgress(provinceId, tasks);
 
     return { value: primaryValue, details };
   }, [filters.overlays, tasks, provinces]);
+
+  function rowsForExport() {
+    const rows: Array<Record<string, string | number>> = [];
+    const allKeys = new Set<string>(['provinceId', 'provinceName', 'tasksCount', 'primaryValue']);
+
+    const interim: Array<{ base: Record<string, string | number>, details: Record<string, string> }> = [];
+
+    Object.entries(provinceCoordinates).forEach(([id]) => {
+      const { value, details } = getIndicatorDetails(id);
+      const province = provinces.find(p => p.id === id);
+      const tasksCount = tasks.filter(task => task.province === id).length;
+
+      const base = {
+        provinceId: id,
+        provinceName: province?.name || id,
+        tasksCount,
+        primaryValue: Number.isFinite(value) ? Number(value.toFixed(2)) : 0,
+      } as Record<string, string | number>;
+
+      Object.keys(details).forEach(k => allKeys.add(k));
+      interim.push({ base, details });
+    });
+
+    interim.forEach(({ base, details }) => {
+      const row: Record<string, string | number> = { ...base };
+      Array.from(allKeys).forEach((k) => {
+        if (k in base) return;
+        row[k] = details[k] ?? '';
+      });
+      rows.push(row);
+    });
+
+    return { headers: Array.from(allKeys), rows };
+  }
+
+  function downloadCsv(filename = 'map-data.csv') {
+    const { headers, rows } = rowsForExport();
+    const esc = (val: any) => {
+      if (val == null) return '';
+      const s = String(val);
+      if (/[",\n]/.test(s)) return '"' + s.replace(/"/g, '""') + '"';
+      return s;
+    };
+    const csv = [headers.join(','), ...rows.map(r => headers.map(h => esc(r[h])).join(','))].join('\n');
+    const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = filename;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+  }
 
   return (
     <div className="h-[calc(100vh-6rem)] flex flex-col">
@@ -110,7 +172,20 @@ function Map() {
         <div className="space-y-3">
           {/* Progress Scale Legend */}
           <div className="bg-white p-3 rounded-lg border shadow-sm">
-            <h2 className="text-lg font-semibold text-gray-900 mb-3">Project Map</h2>
+            <div className="flex items-center justify-between mb-3 gap-2">
+              <h2 className="text-lg font-semibold text-gray-900">Project Map</h2>
+              <button
+                onClick={() => downloadCsv()}
+                className="inline-flex items-center gap-2 px-3 py-1.5 rounded text-sm bg-green-600 text-white hover:bg-green-700"
+                title="Download current map data as CSV"
+              >
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-4 h-4">
+                  <path d="M12 3a1 1 0 011 1v8.586l2.293-2.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 111.414-1.414L11 12.586V4a1 1 0 011-1z" />
+                  <path d="M5 15a1 1 0 011 1v2h12v-2a1 1 0 112 0v3a1 1 0 01-1 1H4a1 1 0 01-1-1v-3a1 1 0 011-1z" />
+                </svg>
+                Download CSV
+              </button>
+            </div>
             <DataLegend title="Progress Scale">
               <div className="space-y-1.5">
                 <LegendItem color="#ef4444" label="0-25%" />
@@ -125,24 +200,6 @@ function Map() {
           <div className="bg-white rounded-lg border shadow-sm">
             <MapFilters />
           </div>
-
-          {/* Indicator Legend */}
-          {filters.overlays.length > 0 && (
-            <div className="bg-white p-4 rounded-lg border shadow-sm">
-              <DataLegend
-                title={filters.overlays.length === 1
-                  ? (overlayOptions.find((o: { id: string; name: string }) => o.id === filters.overlays[0])?.name || 'Selected Indicator')
-                  : `${filters.overlays.length} Indicators Selected`}
-              >
-                <div className="space-y-2">
-                  <LegendItem color="#22c55e" label="75-100%" />
-                  <LegendItem color="#f97316" label="50-75%" />
-                  <LegendItem color="#eab308" label="25-50%" />
-                  <LegendItem color="#ef4444" label="0-25%" />
-                </div>
-              </DataLegend>
-            </div>
-          )}
         </div>
 
         {/* Map Container */}

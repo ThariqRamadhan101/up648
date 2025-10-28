@@ -264,7 +264,7 @@ export const mockSprints = [
     { id: 'sprint-3', name: 'Sprint 3 - December 2025' },
 ];
 
-export const mockTasks: Task[] = [
+const baseMockTasks: Omit<Task, 'budgetTotal' | 'budgetAbsorbed'>[] = [
     {
         id: 'task-1',
         title: 'Elementary School Renovation in Banda Aceh',
@@ -429,8 +429,764 @@ export const mockTasks: Task[] = [
         sprint: 'sprint-3',
         createdAt: new Date('2025-10-25'),
         updatedAt: new Date('2025-10-25')
+    },
+    {
+        id: 'task-16',
+        title: 'Early Childhood Center Upgrade in Lhokseumawe',
+        project: 'Education Facilities',
+        province: 'aceh',
+        creator: 'Nur Aisyah',
+        stage: 'backlog',
+        sprint: 'sprint-1',
+        createdAt: new Date('2025-10-01'),
+        updatedAt: new Date('2025-10-01')
+    },
+    {
+        id: 'task-17',
+        title: 'High School Dormitory Renovation in Medan',
+        project: 'Education Facilities',
+        province: 'sumut',
+        creator: 'Rahmat Hadi',
+        stage: 'procurement',
+        sprint: 'sprint-1',
+        createdAt: new Date('2025-10-02'),
+        updatedAt: new Date('2025-10-05')
+    },
+    {
+        id: 'task-18',
+        title: 'STEM Lab Installation in Bukittinggi',
+        project: 'Education Facilities',
+        province: 'sumbar',
+        creator: 'Clara Santoso',
+        stage: 'construction',
+        sprint: 'sprint-1',
+        createdAt: new Date('2025-10-03'),
+        updatedAt: new Date('2025-10-07')
+    },
+    {
+        id: 'task-19',
+        title: 'Digital Classroom Setup in Dumai',
+        project: 'Education Facilities',
+        province: 'riau',
+        creator: 'Ferry Saputra',
+        stage: 'construction-verification',
+        sprint: 'sprint-1',
+        createdAt: new Date('2025-10-04'),
+        updatedAt: new Date('2025-10-08')
+    },
+    {
+        id: 'task-20',
+        title: 'Library Automation System in Jambi City',
+        project: 'Education Facilities',
+        province: 'jambi',
+        creator: 'Siti Marlina',
+        stage: 'handover',
+        sprint: 'sprint-1',
+        createdAt: new Date('2025-10-05'),
+        updatedAt: new Date('2025-10-09')
+    },
+    {
+        id: 'task-21',
+        title: 'Teacher Training Center Refurbishment in Palembang',
+        project: 'Education Facilities',
+        province: 'sumsel',
+        creator: 'Andi Pratama',
+        stage: 'done',
+        sprint: 'sprint-1',
+        createdAt: new Date('2025-10-06'),
+        updatedAt: new Date('2025-10-10')
+    },
+    {
+        id: 'task-22',
+        title: 'Inclusive Education Facility in Bengkulu City',
+        project: 'Education Facilities',
+        province: 'bengkulu',
+        creator: 'Yunita Sari',
+        stage: 'backlog',
+        sprint: 'sprint-1',
+        createdAt: new Date('2025-10-07'),
+        updatedAt: new Date('2025-10-07')
+    },
+    {
+        id: 'task-23',
+        title: 'School Sports Field Upgrade in Metro',
+        project: 'Education Facilities',
+        province: 'lampung',
+        creator: 'Budi Setiawan',
+        stage: 'procurement',
+        sprint: 'sprint-1',
+        createdAt: new Date('2025-10-08'),
+        updatedAt: new Date('2025-10-12')
+    },
+    {
+        id: 'task-24',
+        title: 'Primary School ICT Expansion in Pangkalpinang',
+        project: 'Education Facilities',
+        province: 'babel',
+        creator: 'Mei Lin',
+        stage: 'construction',
+        sprint: 'sprint-1',
+        createdAt: new Date('2025-10-09'),
+        updatedAt: new Date('2025-10-13')
+    },
+    {
+        id: 'task-25',
+        title: 'Junior High Laboratory Refitting in Central Jakarta',
+        project: 'Education Facilities',
+        province: 'jakarta',
+        creator: 'Dimas Arif',
+        stage: 'construction-verification',
+        sprint: 'sprint-1',
+        createdAt: new Date('2025-10-10'),
+        updatedAt: new Date('2025-10-14')
+    },
+    {
+        id: 'task-26',
+        title: 'Robotics Club Room in Cimahi',
+        project: 'Education Facilities',
+        province: 'jabar',
+        creator: 'Gilang Mahesa',
+        stage: 'handover',
+        sprint: 'sprint-1',
+        createdAt: new Date('2025-10-11'),
+        updatedAt: new Date('2025-10-15')
+    },
+    {
+        id: 'task-27',
+        title: 'Vocational Training Labs in Surakarta',
+        project: 'Education Facilities',
+        province: 'jateng',
+        creator: 'Agnes Dewi',
+        stage: 'done',
+        sprint: 'sprint-1',
+        createdAt: new Date('2025-10-12'),
+        updatedAt: new Date('2025-10-16')
+    },
+    {
+        id: 'task-28',
+        title: 'Student Innovation Hub in Sleman',
+        project: 'Education Facilities',
+        province: 'jogja',
+        creator: 'Rama Putra',
+        stage: 'backlog',
+        sprint: 'sprint-1',
+        createdAt: new Date('2025-10-13'),
+        updatedAt: new Date('2025-10-13')
+    },
+    {
+        id: 'task-29',
+        title: 'STEM Workshop in Sidoarjo',
+        project: 'Education Facilities',
+        province: 'jatim',
+        creator: 'Nadia Fitri',
+        stage: 'procurement',
+        sprint: 'sprint-1',
+        createdAt: new Date('2025-10-14'),
+        updatedAt: new Date('2025-10-17')
+    },
+    {
+        id: 'task-30',
+        title: 'School Health Unit Renovation in Cilegon',
+        project: 'Education Facilities',
+        province: 'banten',
+        creator: 'Rizky Kurnia',
+        stage: 'construction',
+        sprint: 'sprint-1',
+        createdAt: new Date('2025-10-15'),
+        updatedAt: new Date('2025-10-18')
+    },
+    {
+        id: 'task-31',
+        title: 'Teacher Housing Maintenance in Sabang',
+        project: 'Education Facilities',
+        province: 'aceh',
+        creator: 'Cut Intan',
+        stage: 'construction-verification',
+        sprint: 'sprint-1',
+        createdAt: new Date('2025-10-16'),
+        updatedAt: new Date('2025-10-19')
+    },
+    {
+        id: 'task-32',
+        title: 'Campus Wi-Fi Expansion in Binjai',
+        project: 'Education Facilities',
+        province: 'sumut',
+        creator: 'Irfan Maulana',
+        stage: 'handover',
+        sprint: 'sprint-1',
+        createdAt: new Date('2025-10-17'),
+        updatedAt: new Date('2025-10-20')
+    },
+    {
+        id: 'task-33',
+        title: 'Reading Garden Creation in Payakumbuh',
+        project: 'Education Facilities',
+        province: 'sumbar',
+        creator: 'Yohana Sihombing',
+        stage: 'done',
+        sprint: 'sprint-1',
+        createdAt: new Date('2025-10-18'),
+        updatedAt: new Date('2025-10-21')
+    },
+    {
+        id: 'task-34',
+        title: 'Smart Library Kiosk in Siak',
+        project: 'Education Facilities',
+        province: 'riau',
+        creator: 'Fajar Nugroho',
+        stage: 'backlog',
+        sprint: 'sprint-1',
+        createdAt: new Date('2025-10-19'),
+        updatedAt: new Date('2025-10-19')
+    },
+    {
+        id: 'task-35',
+        title: 'Classroom Acoustic Treatment in Sungai Penuh',
+        project: 'Education Facilities',
+        province: 'jambi',
+        creator: 'Salsa Nur',
+        stage: 'procurement',
+        sprint: 'sprint-1',
+        createdAt: new Date('2025-10-20'),
+        updatedAt: new Date('2025-10-22')
+    },
+    {
+        id: 'task-36',
+        title: 'STEM Teacher Lab in Prabumulih',
+        project: 'Education Facilities',
+        province: 'sumsel',
+        creator: 'Wenny Kusuma',
+        stage: 'construction',
+        sprint: 'sprint-1',
+        createdAt: new Date('2025-10-21'),
+        updatedAt: new Date('2025-10-23')
+    },
+    {
+        id: 'task-37',
+        title: 'Special Needs Access Ramps in Manna',
+        project: 'Education Facilities',
+        province: 'bengkulu',
+        creator: 'Haryo Wahyu',
+        stage: 'construction-verification',
+        sprint: 'sprint-1',
+        createdAt: new Date('2025-10-22'),
+        updatedAt: new Date('2025-10-24')
+    },
+    {
+        id: 'task-38',
+        title: 'Solar Lighting for Schools in Pringsewu',
+        project: 'Education Facilities',
+        province: 'lampung',
+        creator: 'Kenny Hartono',
+        stage: 'handover',
+        sprint: 'sprint-1',
+        createdAt: new Date('2025-10-23'),
+        updatedAt: new Date('2025-10-25')
+    },
+    {
+        id: 'task-39',
+        title: 'Digital Attendance Pilot in Belitung',
+        project: 'Education Facilities',
+        province: 'babel',
+        creator: 'Vina Kartika',
+        stage: 'done',
+        sprint: 'sprint-1',
+        createdAt: new Date('2025-10-24'),
+        updatedAt: new Date('2025-10-25')
+    },
+    {
+        id: 'task-40',
+        title: 'STEM Outreach Van for North Jakarta',
+        project: 'Education Facilities',
+        province: 'jakarta',
+        creator: 'William Tan',
+        stage: 'backlog',
+        sprint: 'sprint-1',
+        createdAt: new Date('2025-10-01'),
+        updatedAt: new Date('2025-10-01')
+    },
+    {
+        id: 'task-41',
+        title: 'Coding Lab Setup in Depok',
+        project: 'Education Facilities',
+        province: 'jabar',
+        creator: 'Syifa Aulia',
+        stage: 'procurement',
+        sprint: 'sprint-1',
+        createdAt: new Date('2025-10-02'),
+        updatedAt: new Date('2025-10-04')
+    },
+    {
+        id: 'task-42',
+        title: 'Green School Initiative in Tegal',
+        project: 'Education Facilities',
+        province: 'jateng',
+        creator: 'Hendra Purnama',
+        stage: 'construction',
+        sprint: 'sprint-1',
+        createdAt: new Date('2025-10-03'),
+        updatedAt: new Date('2025-10-06')
+    },
+    {
+        id: 'task-43',
+        title: 'Art and Music Room in Bantul',
+        project: 'Education Facilities',
+        province: 'jogja',
+        creator: 'Taufik Rahman',
+        stage: 'construction-verification',
+        sprint: 'sprint-1',
+        createdAt: new Date('2025-10-04'),
+        updatedAt: new Date('2025-10-07')
+    },
+    {
+        id: 'task-44',
+        title: 'Makerspace in Malang',
+        project: 'Education Facilities',
+        province: 'jatim',
+        creator: 'Dea Kurniasih',
+        stage: 'handover',
+        sprint: 'sprint-1',
+        createdAt: new Date('2025-10-05'),
+        updatedAt: new Date('2025-10-08')
+    },
+    {
+        id: 'task-45',
+        title: 'School Safety Audit in Pandeglang',
+        project: 'Education Facilities',
+        province: 'banten',
+        creator: 'Ratri Puspita',
+        stage: 'done',
+        sprint: 'sprint-1',
+        createdAt: new Date('2025-10-06'),
+        updatedAt: new Date('2025-10-09')
+    },
+    {
+        id: 'task-46',
+        title: 'Seismic Retrofit Study for Schools in Meulaboh',
+        project: 'Education Facilities',
+        province: 'aceh',
+        creator: 'Ilham Saputra',
+        stage: 'backlog',
+        sprint: 'sprint-1',
+        createdAt: new Date('2025-10-07'),
+        updatedAt: new Date('2025-10-07')
+    },
+    {
+        id: 'task-47',
+        title: 'Career Counseling Center in Pematangsiantar',
+        project: 'Education Facilities',
+        province: 'sumut',
+        creator: 'Natasya Lestari',
+        stage: 'procurement',
+        sprint: 'sprint-1',
+        createdAt: new Date('2025-10-08'),
+        updatedAt: new Date('2025-10-11')
+    },
+    {
+        id: 'task-48',
+        title: 'School Canteen Hygiene Upgrade in Pariaman',
+        project: 'Education Facilities',
+        province: 'sumbar',
+        creator: 'Rudi Hartono',
+        stage: 'construction',
+        sprint: 'sprint-1',
+        createdAt: new Date('2025-10-09'),
+        updatedAt: new Date('2025-10-12')
+    },
+    {
+        id: 'task-49',
+        title: 'STEM Outreach Program Center in Tembilahan',
+        project: 'Education Facilities',
+        province: 'riau',
+        creator: 'Sabrina Halim',
+        stage: 'construction-verification',
+        sprint: 'sprint-1',
+        createdAt: new Date('2025-10-10'),
+        updatedAt: new Date('2025-10-13')
+    },
+    {
+        id: 'task-50',
+        title: 'Classroom Ventilation Upgrade in Muara Bungo',
+        project: 'Education Facilities',
+        province: 'jambi',
+        creator: 'Putra Daniel',
+        stage: 'handover',
+        sprint: 'sprint-1',
+        createdAt: new Date('2025-10-11'),
+        updatedAt: new Date('2025-10-14')
+    },
+    {
+        id: 'task-51',
+        title: 'Science Park for Schools in Lubuklinggau',
+        project: 'Education Facilities',
+        province: 'sumsel',
+        creator: 'Kurnia Cahya',
+        stage: 'done',
+        sprint: 'sprint-1',
+        createdAt: new Date('2025-10-12'),
+        updatedAt: new Date('2025-10-15')
+    },
+    {
+        id: 'task-52',
+        title: 'Digital Whiteboard Rollout in Curup',
+        project: 'Education Facilities',
+        province: 'bengkulu',
+        creator: 'Seno Adi',
+        stage: 'backlog',
+        sprint: 'sprint-1',
+        createdAt: new Date('2025-10-13'),
+        updatedAt: new Date('2025-10-13')
+    },
+    {
+        id: 'task-53',
+        title: 'Science Equipment Procurement in Kalianda',
+        project: 'Education Facilities',
+        province: 'lampung',
+        creator: 'Made Sujana',
+        stage: 'procurement',
+        sprint: 'sprint-1',
+        createdAt: new Date('2025-10-14'),
+        updatedAt: new Date('2025-10-16')
+    },
+    {
+        id: 'task-54',
+        title: 'E-Learning Studio in Tanjung Pandan',
+        project: 'Education Facilities',
+        province: 'babel',
+        creator: 'Niko Prasetyo',
+        stage: 'construction',
+        sprint: 'sprint-1',
+        createdAt: new Date('2025-10-15'),
+        updatedAt: new Date('2025-10-17')
+    },
+    {
+        id: 'task-55',
+        title: 'After-School Center in South Jakarta',
+        project: 'Education Facilities',
+        province: 'jakarta',
+        creator: 'Larasati P',
+        stage: 'construction-verification',
+        sprint: 'sprint-1',
+        createdAt: new Date('2025-10-16'),
+        updatedAt: new Date('2025-10-18')
+    },
+    {
+        id: 'task-56',
+        title: 'School Garden Program in Garut',
+        project: 'Education Facilities',
+        province: 'jabar',
+        creator: 'Bayu Firmansyah',
+        stage: 'handover',
+        sprint: 'sprint-1',
+        createdAt: new Date('2025-10-17'),
+        updatedAt: new Date('2025-10-19')
+    },
+    {
+        id: 'task-57',
+        title: 'Digital Literacy Corner in Pekalongan',
+        project: 'Education Facilities',
+        province: 'jateng',
+        creator: 'Sari Melati',
+        stage: 'done',
+        sprint: 'sprint-1',
+        createdAt: new Date('2025-10-18'),
+        updatedAt: new Date('2025-10-20')
+    },
+    {
+        id: 'task-58',
+        title: 'Language Lab in Gunungkidul',
+        project: 'Education Facilities',
+        province: 'jogja',
+        creator: 'Miko Anggara',
+        stage: 'backlog',
+        sprint: 'sprint-1',
+        createdAt: new Date('2025-10-19'),
+        updatedAt: new Date('2025-10-19')
+    },
+    {
+        id: 'task-59',
+        title: 'Inclusive Playground in Kediri',
+        project: 'Education Facilities',
+        province: 'jatim',
+        creator: 'Naufal Reza',
+        stage: 'procurement',
+        sprint: 'sprint-1',
+        createdAt: new Date('2025-10-20'),
+        updatedAt: new Date('2025-10-22')
+    },
+    {
+        id: 'task-60',
+        title: 'School Drainage Improvement in Rangkasbitung',
+        project: 'Education Facilities',
+        province: 'banten',
+        creator: 'Putri Ayu',
+        stage: 'construction',
+        sprint: 'sprint-1',
+        createdAt: new Date('2025-10-21'),
+        updatedAt: new Date('2025-10-23')
+    },
+    {
+        id: 'task-61',
+        title: 'STEM Kit Distribution in Bireuen',
+        project: 'Education Facilities',
+        province: 'aceh',
+        creator: 'Surya Aditya',
+        stage: 'construction-verification',
+        sprint: 'sprint-1',
+        createdAt: new Date('2025-10-22'),
+        updatedAt: new Date('2025-10-24')
+    },
+    {
+        id: 'task-62',
+        title: 'Teacher Resource Center in Tebing Tinggi',
+        project: 'Education Facilities',
+        province: 'sumut',
+        creator: 'Anita Kumala',
+        stage: 'handover',
+        sprint: 'sprint-1',
+        createdAt: new Date('2025-10-23'),
+        updatedAt: new Date('2025-10-25')
+    },
+    {
+        id: 'task-63',
+        title: 'Open Library Space in Solok',
+        project: 'Education Facilities',
+        province: 'sumbar',
+        creator: 'Rafiq Noor',
+        stage: 'done',
+        sprint: 'sprint-1',
+        createdAt: new Date('2025-10-24'),
+        updatedAt: new Date('2025-10-25')
+    },
+    {
+        id: 'task-64',
+        title: 'School Safety Signage in Rengat',
+        project: 'Education Facilities',
+        province: 'riau',
+        creator: 'Maya Paramitha',
+        stage: 'backlog',
+        sprint: 'sprint-1',
+        createdAt: new Date('2025-10-01'),
+        updatedAt: new Date('2025-10-01')
+    },
+    {
+        id: 'task-65',
+        title: 'STEM Mentoring Space in Sarolangun',
+        project: 'Education Facilities',
+        province: 'jambi',
+        creator: 'Rio Fadhil',
+        stage: 'procurement',
+        sprint: 'sprint-1',
+        createdAt: new Date('2025-10-02'),
+        updatedAt: new Date('2025-10-03')
+    },
+    {
+        id: 'task-66',
+        title: 'Smart Attendance Devices in Pagar Alam',
+        project: 'Education Facilities',
+        province: 'sumsel',
+        creator: 'Shinta W',
+        stage: 'construction',
+        sprint: 'sprint-1',
+        createdAt: new Date('2025-10-03'),
+        updatedAt: new Date('2025-10-05')
+    },
+    {
+        id: 'task-67',
+        title: 'Reading Corner Rollout in Arga Makmur',
+        project: 'Education Facilities',
+        province: 'bengkulu',
+        creator: 'Dodi Alamsyah',
+        stage: 'construction-verification',
+        sprint: 'sprint-1',
+        createdAt: new Date('2025-10-04'),
+        updatedAt: new Date('2025-10-06')
+    },
+    {
+        id: 'task-68',
+        title: 'School Fencing Upgrade in Kotabumi',
+        project: 'Education Facilities',
+        province: 'lampung',
+        creator: 'Anwar H',
+        stage: 'handover',
+        sprint: 'sprint-1',
+        createdAt: new Date('2025-10-05'),
+        updatedAt: new Date('2025-10-07')
+    },
+    {
+        id: 'task-69',
+        title: 'Digital Signage in Manggar',
+        project: 'Education Facilities',
+        province: 'babel',
+        creator: 'Selvi A',
+        stage: 'done',
+        sprint: 'sprint-1',
+        createdAt: new Date('2025-10-06'),
+        updatedAt: new Date('2025-10-08')
+    },
+    {
+        id: 'task-70',
+        title: 'STEM Scholarship Outreach in East Jakarta',
+        project: 'Education Facilities',
+        province: 'jakarta',
+        creator: 'Jono Prabowo',
+        stage: 'backlog',
+        sprint: 'sprint-1',
+        createdAt: new Date('2025-10-07'),
+        updatedAt: new Date('2025-10-07')
+    },
+    {
+        id: 'task-71',
+        title: 'School Parking Safety in Subang',
+        project: 'Education Facilities',
+        province: 'jabar',
+        creator: 'Rahmi Handayani',
+        stage: 'procurement',
+        sprint: 'sprint-1',
+        createdAt: new Date('2025-10-08'),
+        updatedAt: new Date('2025-10-09')
+    },
+    {
+        id: 'task-72',
+        title: 'Science Demo Kits in Kudus',
+        project: 'Education Facilities',
+        province: 'jateng',
+        creator: 'Yoga Aditya',
+        stage: 'construction',
+        sprint: 'sprint-1',
+        createdAt: new Date('2025-10-09'),
+        updatedAt: new Date('2025-10-11')
+    },
+    {
+        id: 'task-73',
+        title: 'Student Counseling Booths in Wates',
+        project: 'Education Facilities',
+        province: 'jogja',
+        creator: 'Prita Anggraini',
+        stage: 'construction-verification',
+        sprint: 'sprint-1',
+        createdAt: new Date('2025-10-10'),
+        updatedAt: new Date('2025-10-12')
+    },
+    {
+        id: 'task-74',
+        title: 'Campus Security Cameras in Pasuruan',
+        project: 'Education Facilities',
+        province: 'jatim',
+        creator: 'Suryo Wicaksono',
+        stage: 'handover',
+        sprint: 'sprint-1',
+        createdAt: new Date('2025-10-11'),
+        updatedAt: new Date('2025-10-13')
+    },
+    {
+        id: 'task-75',
+        title: 'STEM Fair Support in Serang City',
+        project: 'Education Facilities',
+        province: 'banten',
+        creator: 'Monica S',
+        stage: 'done',
+        sprint: 'sprint-1',
+        createdAt: new Date('2025-10-12'),
+        updatedAt: new Date('2025-10-14')
+    },
+    {
+        id: 'task-76',
+        title: 'Community Learning Center in Sigli',
+        project: 'Education Facilities',
+        province: 'aceh',
+        creator: 'Suci Ramadhani',
+        stage: 'backlog',
+        sprint: 'sprint-1',
+        createdAt: new Date('2025-10-13'),
+        updatedAt: new Date('2025-10-13')
+    },
+    {
+        id: 'task-77',
+        title: 'STEM Library Corner in Tanjungbalai',
+        project: 'Education Facilities',
+        province: 'sumut',
+        creator: 'Alvin Prakoso',
+        stage: 'procurement',
+        sprint: 'sprint-1',
+        createdAt: new Date('2025-10-14'),
+        updatedAt: new Date('2025-10-16')
+    },
+    {
+        id: 'task-78',
+        title: 'School Roof Maintenance in Sawahlunto',
+        project: 'Education Facilities',
+        province: 'sumbar',
+        creator: 'Mega Putri',
+        stage: 'construction',
+        sprint: 'sprint-1',
+        createdAt: new Date('2025-10-15'),
+        updatedAt: new Date('2025-10-17')
+    },
+    {
+        id: 'task-79',
+        title: 'STEM Curriculum Pilot in Pelalawan',
+        project: 'Education Facilities',
+        province: 'riau',
+        creator: 'Joshua L',
+        stage: 'construction-verification',
+        sprint: 'sprint-1',
+        createdAt: new Date('2025-10-16'),
+        updatedAt: new Date('2025-10-18')
     }
 ];
+
+export const mockTasks: Task[] = baseMockTasks.map((t) => {
+    const base: Task = {
+        ...t,
+        budgetTotal: 100_000_000,
+        budgetAbsorbed:
+            t.stage === 'done' ? 100_000_000 :
+            t.stage === 'handover' ? 90_000_000 :
+            t.stage === 'construction-verification' ? 80_000_000 :
+            t.stage === 'construction' ? 50_000_000 :
+            (t.stage === 'procurement' || t.stage === 'procurement-verification') ? 15_000_000 :
+            0,
+    };
+
+    // Force some tasks into over-limit state for demo
+    const overIds = new Set(['task-10', 'task-21', 'task-39', 'task-57', 'task-63']);
+    if (overIds.has(base.id)) {
+        base.budgetAbsorbed = base.budgetTotal + 20_000_000; // 120%
+    }
+
+    // Seed budget change logs
+    const day = 24 * 60 * 60 * 1000;
+    const d1 = new Date(base.createdAt.getTime() + 1 * day);
+    const d2 = new Date(base.createdAt.getTime() + 3 * day);
+    const d3 = new Date(base.createdAt.getTime() + 5 * day);
+
+    const logs: NonNullable<Task['budgetLogs']> = [];
+
+    // Initial total set (simulate approval/adjustment)
+    logs.push({ at: d1, field: 'budgetTotal', from: 100_000_000, to: 100_000_000 });
+
+    // Absorption progresses depending on stage
+    const stageAbsorbed = base.budgetAbsorbed;
+    const midAbsorbed = Math.max(0, Math.min(100_000_000, Math.floor(stageAbsorbed * 0.6)));
+    const startAbsorbed = Math.min(5_000_000, midAbsorbed);
+
+    if (startAbsorbed > 0) logs.push({ at: d2, field: 'budgetAbsorbed', from: 0, to: startAbsorbed, note: 'Initial disbursement' });
+    if (midAbsorbed > startAbsorbed) logs.push({ at: d3, field: 'budgetAbsorbed', from: startAbsorbed, to: midAbsorbed, note: 'Progress payment' });
+
+    // If over limit, add a recent overrun log
+    if (overIds.has(base.id)) {
+        const d4 = new Date(base.createdAt.getTime() + 7 * day);
+        logs.push({ at: d4, field: 'budgetAbsorbed', from: 100_000_000, to: base.budgetAbsorbed, note: 'Overrun adjustment' });
+    } else if (stageAbsorbed > midAbsorbed) {
+        const d4 = new Date(base.createdAt.getTime() + 7 * day);
+        logs.push({ at: d4, field: 'budgetAbsorbed', from: midAbsorbed, to: stageAbsorbed, note: 'Milestone payment' });
+    }
+
+    (base as Task).budgetLogs = logs;
+
+    return base;
+});
 
 export const mockProjects = [
     'Infrastructure Development',

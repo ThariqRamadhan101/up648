@@ -8,6 +8,7 @@ interface KanbanColumnProps {
     title: string;
     stage: KanbanStage;
     tasks: Task[];
+    onTaskClick?: (task: Task) => void;
 }
 
 const stageColors: Record<KanbanStage, string> = {
@@ -21,7 +22,8 @@ const stageColors: Record<KanbanStage, string> = {
     'done': 'bg-green-100',
 };
 
-export function KanbanColumn({ title, stage, tasks }: KanbanColumnProps) {
+export function KanbanColumn({ title, stage, tasks, onTaskClick }: KanbanColumnProps) {
+
     const { setNodeRef, isOver } = useDroppable({
         id: stage,
     });
@@ -46,7 +48,7 @@ export function KanbanColumn({ title, stage, tasks }: KanbanColumnProps) {
                 <SortableContext items={tasks.map(t => t.id)} strategy={verticalListSortingStrategy}>
                     <div className="space-y-3">
                         {tasks.map((task) => (
-                            <TaskCard key={task.id} task={task} />
+                            <TaskCard key={task.id} task={task} onClick={onTaskClick} />
                         ))}
                     </div>
                 </SortableContext>

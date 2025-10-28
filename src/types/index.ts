@@ -18,6 +18,15 @@ export interface Task {
     sprint: string;
     createdAt: Date;
     updatedAt: Date;
+    budgetTotal: number;
+    budgetAbsorbed: number;
+    budgetLogs?: Array<{
+        at: Date;
+        field: 'budgetTotal' | 'budgetAbsorbed';
+        from: number;
+        to: number;
+        note?: string;
+    }>;
 }
 
 export interface Province {
