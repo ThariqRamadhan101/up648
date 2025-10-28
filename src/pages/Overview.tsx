@@ -192,6 +192,27 @@ export default function Overview() {
         }).sort((a, b) => b.score - a.score).slice(0, 5);
     })();
 
+    const taskAttention = (() => {
+        const now = Date.now();
+        return tasks.map(t => {
+            const daysSinceUpdate = Math.floor((now - t.updatedAt.getTime()) / (1000 * 60 * 60 * 24));
+            const stalled = daysSinceUpdate > 10 ? 1 : 0;
+            const overBudget = t.budgetAbsorbed > t.budgetTotal ? 1 : 0;
+            const earlyStage = (t.stage === 'backlog' || t.stage === 'backlog-verification') ? 1 : 0;
+            const score = overBudget * 3 + stalled * 2 + earlyStage * 1;
+            return {
+                id: t.id,
+                title: t.title,
+                project: t.project,
+                province: t.province,
+                stage: t.stage,
+                daysSinceUpdate,
+                overBudget: overBudget === 1,
+                score: Number(score.toFixed(1)),
+            };
+        }).sort((a, b) => b.score - a.score || b.daysSinceUpdate - a.daysSinceUpdate).slice(0, 8);
+    })();
+
     
 
     
@@ -227,6 +248,21 @@ export default function Overview() {
                                         <div className="text-xs text-gray-600">Progress {p.progress}% • Over budget {p.overBudget} • Stalled {p.stalled}</div>
                                     </div>
                                     <span className="inline-flex items-center px-2 py-1 rounded text-xs font-semibold bg-orange-600/10 text-orange-800 border border-orange-300">Score {p.score}</span>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+                    <div>
+                        <h4 className="text-sm font-semibold text-gray-900 mb-2">Tasks Needing Attention</h4>
+                        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-4">
+                            {taskAttention.map((t) => (
+                                <div key={`task-${t.id}`} className="flex items-center justify-between p-3 bg-white/80 rounded border border-amber-200 hover:shadow-md hover:border-amber-300 transition">
+                                    <div className="min-w-0">
+                                        <div className="font-medium text-gray-900 truncate">{t.title}</div>
+                                        <div className="text-xs text-gray-600 truncate">{t.project} • {t.province} • {t.stage.replace('-', ' ')}</div>
+                                        <div className="text-xs text-gray-600">{t.overBudget ? 'Over budget' : 'On budget'} • {t.daysSinceUpdate}d since update</div>
+                                    </div>
+                                    <span className="inline-flex items-center px-2 py-1 rounded text-xs font-semibold bg-amber-600/10 text-amber-800 border border-amber-300">Score {t.score}</span>
                                 </div>
                             ))}
                         </div>
