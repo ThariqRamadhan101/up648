@@ -100,16 +100,6 @@ export function IndicatorForm() {
         }
     };
 
-    const handleIcorChange = (province: Province, key: 'icor2024' | 'icor2025', value: number) => {
-        const next = {
-            ...province,
-            indicators: {
-                ...province.indicators,
-                [key]: value,
-            }
-        } as Province;
-        updateProvince(province.id, next);
-    };
 
     return (
         <div>

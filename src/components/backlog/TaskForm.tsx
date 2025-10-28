@@ -36,6 +36,8 @@ export function TaskForm() {
             sprint: formData.sprint,
             stage: 'backlog',
             creator: 'Current User', // TODO: Add user management
+            budgetTotal: 0,
+            budgetAbsorbed: 0,
         });
 
         setFormData({

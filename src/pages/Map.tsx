@@ -4,7 +4,6 @@ import { useStore } from '../store/store';
 import { provinceCoordinates } from '../data/provinces';
 import { MapFilters } from '../components/map/MapFilters';
 import { DataLegend, LegendItem } from '../components/map/DataLegend';
-import { overlayOptions } from '../components/map/MapFilters';
 import 'leaflet/dist/leaflet.css';
 
 // Helper Functions
