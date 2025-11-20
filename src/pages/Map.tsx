@@ -262,7 +262,7 @@ function Map() {
             zoom={5}
             className="h-full w-full rounded-lg"
             zoomControl={false}
-            maxZoom={10}
+            maxZoom={18}
             minZoom={4}
           >
             <MapFocus taskId={focusedTaskId} tasks={tasks} provinces={provinces} />

@@ -1,6 +1,7 @@
 import { useState, useRef } from 'react';
 import { useStore } from '../store/store';
 import { ProvinceChart } from '../components/data/ProvinceChart';
+import type { KanbanStage } from '../types';
 
 // tabs removed; charts now render as a single vertical stack
 
@@ -17,8 +18,36 @@ type SortState = {
 };
 
 export default function Overview() {
+
     const { provinces, tasks, filters } = useStore((s) => ({ provinces: s.provinces, tasks: s.tasks, filters: s.filters }));
+    const allStages: KanbanStage[] = [
+        'backlog',
+        'backlog-verification',
+        'procurement',
+        'procurement-verification',
+        'construction',
+        'construction-verification',
+        'handover',
+        'done',
+    ];
+    const [selectedProvinceForStages, setSelectedProvinceForStages] = useState<string>('all');
+    const [selectedStageForProvinces, setSelectedStageForProvinces] = useState<KanbanStage | 'all'>('all');
+    const tasksByStageForProvince = allStages.map((stage) => {
+        const filtered = tasks.filter((t) =>
+            (selectedProvinceForStages === 'all' || t.province === selectedProvinceForStages) && t.stage === stage
+        );
+        return { stage, count: filtered.length };
+    });
+    const tasksByProvinceForStage = provinces.map((p) => {
+        const filtered = tasks.filter((t) =>
+            t.province === p.id && (selectedStageForProvinces === 'all' || t.stage === selectedStageForProvinces)
+        );
+        return { provinceId: p.id, provinceName: p.name, count: filtered.length };
+    });
+    const maxStageCount = Math.max(...tasksByStageForProvince.map((x) => x.count), 1);
+    const maxProvinceCount = Math.max(...tasksByProvinceForStage.map((x) => x.count), 1);
     const chartsRef = useRef<HTMLDivElement>(null);
+
     const chartAnchors = {
         icor2024: useRef<HTMLDivElement>(null),
         icor2025: useRef<HTMLDivElement>(null),
@@ -164,8 +193,6 @@ export default function Overview() {
         }).sort((a, b) => b.risk - a.risk).slice(0, 5);
     })();
 
-    
-
     const projectAttention = (() => {
         const now = Date.now();
         const byProject: Record<string, typeof tasks> = {} as any;
@@ -220,10 +247,6 @@ export default function Overview() {
             .sort((a, b) => b.score - a.score || b.daysSinceUpdate - a.daysSinceUpdate)
             .slice(0, 8);
     })();
-
-    
-
-    
 
     const [budgetLogLimit, setBudgetLogLimit] = useState(10);
 
@@ -336,6 +359,97 @@ export default function Overview() {
                             <span className="text-gray-500">Done</span>
                             <span className="font-medium">{taskStats.done}</span>
                         </div>
+                    </div>
+                </div>
+            </div>
+
+            <div className="grid grid-cols-1 xl:grid-cols-2 gap-6">
+                <div className="bg-white p-6 rounded-lg border shadow-sm w-full">
+                    <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4 mb-4">
+                        <h3 className="text-lg font-medium text-gray-900">Tasks by Stage per Province</h3>
+                        <div className="flex items-center gap-2">
+                            <span className="text-sm text-gray-500">Province</span>
+                            <select
+                                value={selectedProvinceForStages}
+                                onChange={(e) => setSelectedProvinceForStages(e.target.value)}
+                                className="text-sm border rounded px-2 py-1 bg-white"
+                            >
+                                <option value="all">All provinces</option>
+                                {provinces.map((p) => (
+                                    <option key={p.id} value={p.id}>
+                                        {p.name}
+                                    </option>
+                                ))}
+                            </select>
+                        </div>
+                    </div>
+                    <div className="space-y-2">
+                        {tasksByStageForProvince.map(({ stage, count }) => {
+                            const width = (count / maxStageCount) * 100;
+                            return (
+                                <div key={stage} className="flex items-center gap-3">
+                                    <div className="w-40 text-xs text-gray-600 truncate">
+                                        {stage.replace(/-/g, ' ')}
+                                    </div>
+                                    <div className="flex-1 h-4 bg-gray-100 rounded-full overflow-hidden">
+                                        <div
+                                            className="h-full bg-orange-500 rounded-full"
+                                            style={{ width: `${width || 0}%` }}
+                                        />
+                                    </div>
+                                    <div className="w-10 text-xs text-gray-700 text-right">
+                                        {count}
+                                    </div>
+                                </div>
+                            );
+                        })}
+                        {tasksByStageForProvince.every((x) => x.count === 0) && (
+                            <div className="text-sm text-gray-500 mt-2">No tasks for this selection.</div>
+                        )}
+                    </div>
+                </div>
+                <div className="bg-white p-6 rounded-lg border shadow-sm w-full">
+                    <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4 mb-4">
+                        <h3 className="text-lg font-medium text-gray-900">Tasks by Province per Stage</h3>
+                        <div className="flex items-center gap-2">
+                            <span className="text-sm text-gray-500">Stage</span>
+                            <select
+                                value={selectedStageForProvinces}
+                                onChange={(e) => setSelectedStageForProvinces(e.target.value as KanbanStage | 'all')}
+                                className="text-sm border rounded px-2 py-1 bg-white"
+                            >
+                                <option value="all">All stages</option>
+                                {allStages.map((s) => (
+                                    <option key={s} value={s}>
+                                        {s.replace(/-/g, ' ')}
+                                    </option>
+                                ))}
+                            </select>
+                        </div>
+                    </div>
+                    <div className="space-y-2 max-h-72 overflow-y-auto">
+                        {tasksByProvinceForStage.map(({ provinceId, provinceName, count }) => {
+                            const width = (count / maxProvinceCount) * 100;
+                            return (
+                                <div key={provinceId} className="flex items-center gap-3">
+                                    <div className="w-40 text-xs text-gray-600 truncate">
+                                        {provinceName}
+                                    </div>
+                                    <div className="flex-1 h-4 bg-gray-100 rounded-full overflow-hidden">
+                                        <div
+                                            className="h-full bg-sky-500 rounded-full"
+                                            style={{ width: `${width || 0}%` }}
+                                        />
+                                    </div>
+                                    <div className="w-10 text-xs text-gray-700 text-right">
+                                        {count}
+                                    </div>
+                                </div>
+                            );
+                        })}
+                        {tasksByProvinceForStage.every((x) => x.count === 0) && (
+                            <div className="text-sm text-gray-500 mt-2">No tasks for this selection.</div>
+                        )}
                     </div>
                 </div>
             </div>
