@@ -287,7 +287,7 @@ const baseMockTasks: Omit<Task, 'budgetTotal' | 'budgetAbsorbed'>[] = [
         sprint: 'sprint-1',
         createdAt: new Date('2025-10-10'),
         updatedAt: new Date('2025-10-20'),
-        coordinates: [2.1154, 99.5451]
+        coordinates: [3.5813924, 98.6670341]
     },
     {
         id: 'task-3',
@@ -299,7 +299,7 @@ const baseMockTasks: Omit<Task, 'budgetTotal' | 'budgetAbsorbed'>[] = [
         sprint: 'sprint-1',
         createdAt: new Date('2025-10-12'),
         updatedAt: new Date('2025-10-22'),
-        coordinates: [-0.7399, 100.8]
+        coordinates: [-0.8968934, 100.3464694]
     },
     {
         id: 'task-4',
@@ -310,7 +310,8 @@ const baseMockTasks: Omit<Task, 'budgetTotal' | 'budgetAbsorbed'>[] = [
         stage: 'construction-verification',
         sprint: 'sprint-2',
         createdAt: new Date('2025-10-18'),
-        updatedAt: new Date('2025-10-23')
+        updatedAt: new Date('2025-10-23'),
+        coordinates: [0.5156454, 101.3991751]
     },
     {
         id: 'task-5',
@@ -321,7 +322,8 @@ const baseMockTasks: Omit<Task, 'budgetTotal' | 'budgetAbsorbed'>[] = [
         stage: 'done',
         sprint: 'sprint-1',
         createdAt: new Date('2025-10-05'),
-        updatedAt: new Date('2025-10-25')
+        updatedAt: new Date('2025-10-25'),
+        coordinates: [-1.6275941, 103.567495]
     },
     {
         id: 'task-6',
@@ -332,7 +334,8 @@ const baseMockTasks: Omit<Task, 'budgetTotal' | 'budgetAbsorbed'>[] = [
         stage: 'backlog',
         sprint: 'sprint-2',
         createdAt: new Date('2025-10-20'),
-        updatedAt: new Date('2025-10-20')
+        updatedAt: new Date('2025-10-20'),
+        coordinates: [-2.9694625, 104.7160457]
     },
     {
         id: 'task-7',
@@ -343,7 +346,8 @@ const baseMockTasks: Omit<Task, 'budgetTotal' | 'budgetAbsorbed'>[] = [
         stage: 'procurement',
         sprint: 'sprint-2',
         createdAt: new Date('2025-10-19'),
-        updatedAt: new Date('2025-10-24')
+        updatedAt: new Date('2025-10-24'),
+        coordinates: [-3.8144989, 102.3193645]
     },
     {
         id: 'task-8',
@@ -354,7 +358,8 @@ const baseMockTasks: Omit<Task, 'budgetTotal' | 'budgetAbsorbed'>[] = [
         stage: 'construction',
         sprint: 'sprint-3',
         createdAt: new Date('2025-10-21'),
-        updatedAt: new Date('2025-10-25')
+        updatedAt: new Date('2025-10-25'),
+        coordinates: [-5.3958876, 105.2336302]
     },
     {
         id: 'task-9',
@@ -365,7 +370,8 @@ const baseMockTasks: Omit<Task, 'budgetTotal' | 'budgetAbsorbed'>[] = [
         stage: 'handover',
         sprint: 'sprint-2',
         createdAt: new Date('2025-10-17'),
-        updatedAt: new Date('2025-10-22')
+        updatedAt: new Date('2025-10-22'),
+        coordinates: [-2.1332089, 106.1056512]
     },
     {
         id: 'task-10',
@@ -376,7 +382,8 @@ const baseMockTasks: Omit<Task, 'budgetTotal' | 'budgetAbsorbed'>[] = [
         stage: 'done',
         sprint: 'sprint-1',
         createdAt: new Date('2025-10-08'),
-        updatedAt: new Date('2025-10-24')
+        updatedAt: new Date('2025-10-24'),
+        coordinates: [-6.2212544, 106.7321754]
     },
     {
         id: 'task-11',
@@ -387,7 +394,8 @@ const baseMockTasks: Omit<Task, 'budgetTotal' | 'budgetAbsorbed'>[] = [
         stage: 'backlog',
         sprint: 'sprint-3',
         createdAt: new Date('2025-10-22'),
-        updatedAt: new Date('2025-10-22')
+        updatedAt: new Date('2025-10-22'),
+        coordinates: [-6.8905271, 107.4821124]
     },
     {
         id: 'task-12',
@@ -398,7 +406,8 @@ const baseMockTasks: Omit<Task, 'budgetTotal' | 'budgetAbsorbed'>[] = [
         stage: 'procurement',
         sprint: 'sprint-3',
         createdAt: new Date('2025-10-23'),
-        updatedAt: new Date('2025-10-25')
+        updatedAt: new Date('2025-10-25'),
+        coordinates: [-6.980375, 110.4318719]
     },
     {
         id: 'task-13',
@@ -409,7 +418,8 @@ const baseMockTasks: Omit<Task, 'budgetTotal' | 'budgetAbsorbed'>[] = [
         stage: 'construction',
         sprint: 'sprint-2',
         createdAt: new Date('2025-10-16'),
-        updatedAt: new Date('2025-10-21')
+        updatedAt: new Date('2025-10-21'),
+        coordinates: [-7.8552811, 109.998708]
     },
     {
         id: 'task-14',
@@ -420,7 +430,8 @@ const baseMockTasks: Omit<Task, 'budgetTotal' | 'budgetAbsorbed'>[] = [
         stage: 'construction-verification',
         sprint: 'sprint-3',
         createdAt: new Date('2025-10-24'),
-        updatedAt: new Date('2025-10-25')
+        updatedAt: new Date('2025-10-25'),
+        coordinates: [-7.3000129, 112.5883034]
     },
     {
         id: 'task-15',
@@ -431,7 +442,8 @@ const baseMockTasks: Omit<Task, 'budgetTotal' | 'budgetAbsorbed'>[] = [
         stage: 'backlog',
         sprint: 'sprint-3',
         createdAt: new Date('2025-10-25'),
-        updatedAt: new Date('2025-10-25')
+        updatedAt: new Date('2025-10-25'),
+        coordinates: [-6.127532, 106.1240754]
     },
     {
         id: 'task-16',
@@ -442,7 +454,8 @@ const baseMockTasks: Omit<Task, 'budgetTotal' | 'budgetAbsorbed'>[] = [
         stage: 'backlog',
         sprint: 'sprint-1',
         createdAt: new Date('2025-10-01'),
-        updatedAt: new Date('2025-10-01')
+        updatedAt: new Date('2025-10-01'),
+        coordinates: [5.181084, 97.1465479]
     },
     {
         id: 'task-17',
@@ -453,7 +466,8 @@ const baseMockTasks: Omit<Task, 'budgetTotal' | 'budgetAbsorbed'>[] = [
         stage: 'procurement',
         sprint: 'sprint-1',
         createdAt: new Date('2025-10-02'),
-        updatedAt: new Date('2025-10-05')
+        updatedAt: new Date('2025-10-05'),
+        coordinates: [3.5463481, 98.6797658]
     },
     {
         id: 'task-18',
@@ -464,7 +478,8 @@ const baseMockTasks: Omit<Task, 'budgetTotal' | 'budgetAbsorbed'>[] = [
         stage: 'construction',
         sprint: 'sprint-1',
         createdAt: new Date('2025-10-03'),
-        updatedAt: new Date('2025-10-07')
+        updatedAt: new Date('2025-10-07'),
+        coordinates: [-0.2936066, 100.3628834]
     },
     {
         id: 'task-19',
@@ -475,7 +490,8 @@ const baseMockTasks: Omit<Task, 'budgetTotal' | 'budgetAbsorbed'>[] = [
         stage: 'construction-verification',
         sprint: 'sprint-1',
         createdAt: new Date('2025-10-04'),
-        updatedAt: new Date('2025-10-08')
+        updatedAt: new Date('2025-10-08'),
+        coordinates: [1.6192532, 101.4332195]
     },
     {
         id: 'task-20',
@@ -486,7 +502,8 @@ const baseMockTasks: Omit<Task, 'budgetTotal' | 'budgetAbsorbed'>[] = [
         stage: 'handover',
         sprint: 'sprint-1',
         createdAt: new Date('2025-10-05'),
-        updatedAt: new Date('2025-10-09')
+        updatedAt: new Date('2025-10-09'),
+        coordinates: [-1.6121673, 103.5800002]
     },
     {
         id: 'task-21',
@@ -497,7 +514,8 @@ const baseMockTasks: Omit<Task, 'budgetTotal' | 'budgetAbsorbed'>[] = [
         stage: 'done',
         sprint: 'sprint-1',
         createdAt: new Date('2025-10-06'),
-        updatedAt: new Date('2025-10-10')
+        updatedAt: new Date('2025-10-10'),
+        coordinates: [-2.9765393, 104.7378353]
     },
     {
         id: 'task-22',
@@ -508,7 +526,8 @@ const baseMockTasks: Omit<Task, 'budgetTotal' | 'budgetAbsorbed'>[] = [
         stage: 'backlog',
         sprint: 'sprint-1',
         createdAt: new Date('2025-10-07'),
-        updatedAt: new Date('2025-10-07')
+        updatedAt: new Date('2025-10-07'),
+        coordinates: [-3.8001613, 102.2503088]
     },
     {
         id: 'task-23',
@@ -519,7 +538,8 @@ const baseMockTasks: Omit<Task, 'budgetTotal' | 'budgetAbsorbed'>[] = [
         stage: 'procurement',
         sprint: 'sprint-1',
         createdAt: new Date('2025-10-08'),
-        updatedAt: new Date('2025-10-12')
+        updatedAt: new Date('2025-10-12'),
+        coordinates: [-5.127541, 105.3044906]
     },
     {
         id: 'task-24',
@@ -530,7 +550,8 @@ const baseMockTasks: Omit<Task, 'budgetTotal' | 'budgetAbsorbed'>[] = [
         stage: 'construction',
         sprint: 'sprint-1',
         createdAt: new Date('2025-10-09'),
-        updatedAt: new Date('2025-10-13')
+        updatedAt: new Date('2025-10-13'),
+        coordinates: [-2.1332089, 106.1056512]
     },
     {
         id: 'task-25',
@@ -541,7 +562,8 @@ const baseMockTasks: Omit<Task, 'budgetTotal' | 'budgetAbsorbed'>[] = [
         stage: 'construction-verification',
         sprint: 'sprint-1',
         createdAt: new Date('2025-10-10'),
-        updatedAt: new Date('2025-10-14')
+        updatedAt: new Date('2025-10-14'),
+        coordinates: [-6.1804281, 106.8192924]
     },
     {
         id: 'task-26',
@@ -552,7 +574,8 @@ const baseMockTasks: Omit<Task, 'budgetTotal' | 'budgetAbsorbed'>[] = [
         stage: 'handover',
         sprint: 'sprint-1',
         createdAt: new Date('2025-10-11'),
-        updatedAt: new Date('2025-10-15')
+        updatedAt: new Date('2025-10-15'),
+        coordinates: [-6.8841901, 107.5018025]
     },
     {
         id: 'task-27',
@@ -563,7 +586,8 @@ const baseMockTasks: Omit<Task, 'budgetTotal' | 'budgetAbsorbed'>[] = [
         stage: 'done',
         sprint: 'sprint-1',
         createdAt: new Date('2025-10-12'),
-        updatedAt: new Date('2025-10-16')
+        updatedAt: new Date('2025-10-16'),
+        coordinates: [-7.5601479, 110.7821371]
     },
     {
         id: 'task-28',
@@ -574,7 +598,8 @@ const baseMockTasks: Omit<Task, 'budgetTotal' | 'budgetAbsorbed'>[] = [
         stage: 'backlog',
         sprint: 'sprint-1',
         createdAt: new Date('2025-10-13'),
-        updatedAt: new Date('2025-10-13')
+        updatedAt: new Date('2025-10-17'),
+        coordinates: [-7.7002435, 110.3452528]
     },
     {
         id: 'task-29',
@@ -585,7 +610,8 @@ const baseMockTasks: Omit<Task, 'budgetTotal' | 'budgetAbsorbed'>[] = [
         stage: 'procurement',
         sprint: 'sprint-1',
         createdAt: new Date('2025-10-14'),
-        updatedAt: new Date('2025-10-17')
+        updatedAt: new Date('2025-10-18'),
+        coordinates: [-7.4490703, 112.6997296]
     },
     {
         id: 'task-30',
@@ -596,7 +622,8 @@ const baseMockTasks: Omit<Task, 'budgetTotal' | 'budgetAbsorbed'>[] = [
         stage: 'construction',
         sprint: 'sprint-1',
         createdAt: new Date('2025-10-15'),
-        updatedAt: new Date('2025-10-18')
+        updatedAt: new Date('2025-10-18'),
+        coordinates: [-6.0193302, 106.0478225]
     },
     {
         id: 'task-31',
@@ -607,7 +634,8 @@ const baseMockTasks: Omit<Task, 'budgetTotal' | 'budgetAbsorbed'>[] = [
         stage: 'construction-verification',
         sprint: 'sprint-1',
         createdAt: new Date('2025-10-16'),
-        updatedAt: new Date('2025-10-19')
+        updatedAt: new Date('2025-10-19'),
+        coordinates: [5.8887308, 95.3081572]
     },
     {
         id: 'task-32',
@@ -618,7 +646,8 @@ const baseMockTasks: Omit<Task, 'budgetTotal' | 'budgetAbsorbed'>[] = [
         stage: 'handover',
         sprint: 'sprint-1',
         createdAt: new Date('2025-10-17'),
-        updatedAt: new Date('2025-10-20')
+        updatedAt: new Date('2025-10-20'),
+        coordinates: [3.6389124, 98.4440961]
     },
     {
         id: 'task-33',
@@ -629,7 +658,8 @@ const baseMockTasks: Omit<Task, 'budgetTotal' | 'budgetAbsorbed'>[] = [
         stage: 'done',
         sprint: 'sprint-1',
         createdAt: new Date('2025-10-18'),
-        updatedAt: new Date('2025-10-21')
+        updatedAt: new Date('2025-10-21'),
+        coordinates: [-0.2227475, 100.5889863]
     },
     {
         id: 'task-34',
@@ -640,7 +670,8 @@ const baseMockTasks: Omit<Task, 'budgetTotal' | 'budgetAbsorbed'>[] = [
         stage: 'backlog',
         sprint: 'sprint-1',
         createdAt: new Date('2025-10-19'),
-        updatedAt: new Date('2025-10-19')
+        updatedAt: new Date('2025-10-19'),
+        coordinates: [-0.221273, 99.9707395]
     },
     {
         id: 'task-35',
@@ -651,7 +682,8 @@ const baseMockTasks: Omit<Task, 'budgetTotal' | 'budgetAbsorbed'>[] = [
         stage: 'procurement',
         sprint: 'sprint-1',
         createdAt: new Date('2025-10-20'),
-        updatedAt: new Date('2025-10-22')
+        updatedAt: new Date('2025-10-22'),
+        coordinates: [-2.0702717, 101.3934019]
     },
     {
         id: 'task-36',
@@ -662,7 +694,8 @@ const baseMockTasks: Omit<Task, 'budgetTotal' | 'budgetAbsorbed'>[] = [
         stage: 'construction',
         sprint: 'sprint-1',
         createdAt: new Date('2025-10-21'),
-        updatedAt: new Date('2025-10-23')
+        updatedAt: new Date('2025-10-23'),
+        coordinates: [-3.42899, 104.2337971]
     },
     {
         id: 'task-37',
@@ -673,7 +706,8 @@ const baseMockTasks: Omit<Task, 'budgetTotal' | 'budgetAbsorbed'>[] = [
         stage: 'construction-verification',
         sprint: 'sprint-1',
         createdAt: new Date('2025-10-22'),
-        updatedAt: new Date('2025-10-24')
+        updatedAt: new Date('2025-10-24'),
+        coordinates: [-4.4716475, 102.9336386]
     },
     {
         id: 'task-38',
@@ -684,7 +718,8 @@ const baseMockTasks: Omit<Task, 'budgetTotal' | 'budgetAbsorbed'>[] = [
         stage: 'handover',
         sprint: 'sprint-1',
         createdAt: new Date('2025-10-23'),
-        updatedAt: new Date('2025-10-25')
+        updatedAt: new Date('2025-10-25'),
+        coordinates: [-5.3402637, 104.9026277]
     },
     {
         id: 'task-39',
@@ -695,7 +730,8 @@ const baseMockTasks: Omit<Task, 'budgetTotal' | 'budgetAbsorbed'>[] = [
         stage: 'done',
         sprint: 'sprint-1',
         createdAt: new Date('2025-10-24'),
-        updatedAt: new Date('2025-10-25')
+        updatedAt: new Date('2025-10-25'),
+        coordinates: [-2.3763869, 106.3233399]
     },
     {
         id: 'task-40',
@@ -706,7 +742,8 @@ const baseMockTasks: Omit<Task, 'budgetTotal' | 'budgetAbsorbed'>[] = [
         stage: 'backlog',
         sprint: 'sprint-1',
         createdAt: new Date('2025-10-01'),
-        updatedAt: new Date('2025-10-01')
+        updatedAt: new Date('2025-10-01'),
+        coordinates: [-6.140873, 106.8335651]
     },
     {
         id: 'task-41',
@@ -717,7 +754,8 @@ const baseMockTasks: Omit<Task, 'budgetTotal' | 'budgetAbsorbed'>[] = [
         stage: 'procurement',
         sprint: 'sprint-1',
         createdAt: new Date('2025-10-02'),
-        updatedAt: new Date('2025-10-04')
+        updatedAt: new Date('2025-10-04'),
+        coordinates: [-6.3952381, 106.8119206]
     },
     {
         id: 'task-42',
@@ -728,7 +766,8 @@ const baseMockTasks: Omit<Task, 'budgetTotal' | 'budgetAbsorbed'>[] = [
         stage: 'construction',
         sprint: 'sprint-1',
         createdAt: new Date('2025-10-03'),
-        updatedAt: new Date('2025-10-06')
+        updatedAt: new Date('2025-10-06'),
+        coordinates: [-6.8726686, 109.139234]
     },
     {
         id: 'task-43',
@@ -739,7 +778,8 @@ const baseMockTasks: Omit<Task, 'budgetTotal' | 'budgetAbsorbed'>[] = [
         stage: 'construction-verification',
         sprint: 'sprint-1',
         createdAt: new Date('2025-10-04'),
-        updatedAt: new Date('2025-10-07')
+        updatedAt: new Date('2025-10-07'),
+        coordinates: [-7.8749227, 110.3332501]
     },
     {
         id: 'task-44',
@@ -750,7 +790,8 @@ const baseMockTasks: Omit<Task, 'budgetTotal' | 'budgetAbsorbed'>[] = [
         stage: 'handover',
         sprint: 'sprint-1',
         createdAt: new Date('2025-10-05'),
-        updatedAt: new Date('2025-10-08')
+        updatedAt: new Date('2025-10-08'),
+        coordinates: [-7.9834224, 112.6007412]
     },
     {
         id: 'task-45',
@@ -761,7 +802,8 @@ const baseMockTasks: Omit<Task, 'budgetTotal' | 'budgetAbsorbed'>[] = [
         stage: 'done',
         sprint: 'sprint-1',
         createdAt: new Date('2025-10-06'),
-        updatedAt: new Date('2025-10-09')
+        updatedAt: new Date('2025-10-09'),
+        coordinates: [-6.3152049, 106.069916]
     },
     {
         id: 'task-46',
@@ -772,7 +814,8 @@ const baseMockTasks: Omit<Task, 'budgetTotal' | 'budgetAbsorbed'>[] = [
         stage: 'backlog',
         sprint: 'sprint-1',
         createdAt: new Date('2025-10-07'),
-        updatedAt: new Date('2025-10-07')
+        updatedAt: new Date('2025-10-07'),
+        coordinates: [4.1584287, 96.1048699]
     },
     {
         id: 'task-47',
@@ -783,7 +826,8 @@ const baseMockTasks: Omit<Task, 'budgetTotal' | 'budgetAbsorbed'>[] = [
         stage: 'procurement',
         sprint: 'sprint-1',
         createdAt: new Date('2025-10-08'),
-        updatedAt: new Date('2025-10-11')
+        updatedAt: new Date('2025-10-11'),
+        coordinates: [2.9685922, 99.0435413]
     },
     {
         id: 'task-48',
@@ -794,7 +838,8 @@ const baseMockTasks: Omit<Task, 'budgetTotal' | 'budgetAbsorbed'>[] = [
         stage: 'construction',
         sprint: 'sprint-1',
         createdAt: new Date('2025-10-09'),
-        updatedAt: new Date('2025-10-12')
+        updatedAt: new Date('2025-10-12'),
+        coordinates: [-0.616002, 100.0917709]
     },
     {
         id: 'task-49',
@@ -805,7 +850,8 @@ const baseMockTasks: Omit<Task, 'budgetTotal' | 'budgetAbsorbed'>[] = [
         stage: 'construction-verification',
         sprint: 'sprint-1',
         createdAt: new Date('2025-10-10'),
-        updatedAt: new Date('2025-10-13')
+        updatedAt: new Date('2025-10-13'),
+        coordinates: [-0.3129563, 103.1546706]
     },
     {
         id: 'task-50',
@@ -816,7 +862,8 @@ const baseMockTasks: Omit<Task, 'budgetTotal' | 'budgetAbsorbed'>[] = [
         stage: 'handover',
         sprint: 'sprint-1',
         createdAt: new Date('2025-10-11'),
-        updatedAt: new Date('2025-10-14')
+        updatedAt: new Date('2025-10-14'),
+        coordinates: [-1.4948401, 102.0317409]
     },
     {
         id: 'task-51',
@@ -827,7 +874,8 @@ const baseMockTasks: Omit<Task, 'budgetTotal' | 'budgetAbsorbed'>[] = [
         stage: 'done',
         sprint: 'sprint-1',
         createdAt: new Date('2025-10-12'),
-        updatedAt: new Date('2025-10-15')
+        updatedAt: new Date('2025-10-15'),
+        coordinates: [-3.2777407, 102.8342977]
     },
     {
         id: 'task-52',
@@ -838,7 +886,8 @@ const baseMockTasks: Omit<Task, 'budgetTotal' | 'budgetAbsorbed'>[] = [
         stage: 'backlog',
         sprint: 'sprint-1',
         createdAt: new Date('2025-10-13'),
-        updatedAt: new Date('2025-10-13')
+        updatedAt: new Date('2025-10-13'),
+        coordinates: [-3.4671609, 102.5165954]
     },
     {
         id: 'task-53',
@@ -849,7 +898,8 @@ const baseMockTasks: Omit<Task, 'budgetTotal' | 'budgetAbsorbed'>[] = [
         stage: 'procurement',
         sprint: 'sprint-1',
         createdAt: new Date('2025-10-14'),
-        updatedAt: new Date('2025-10-16')
+        updatedAt: new Date('2025-10-16'),
+        coordinates: [-5.7298062, 105.5883492]
     },
     {
         id: 'task-54',
@@ -860,7 +910,8 @@ const baseMockTasks: Omit<Task, 'budgetTotal' | 'budgetAbsorbed'>[] = [
         stage: 'construction',
         sprint: 'sprint-1',
         createdAt: new Date('2025-10-15'),
-        updatedAt: new Date('2025-10-17')
+        updatedAt: new Date('2025-10-17'),
+        coordinates: [-2.7334907, 107.6305377]
     },
     {
         id: 'task-55',
@@ -871,7 +922,8 @@ const baseMockTasks: Omit<Task, 'budgetTotal' | 'budgetAbsorbed'>[] = [
         stage: 'construction-verification',
         sprint: 'sprint-1',
         createdAt: new Date('2025-10-16'),
-        updatedAt: new Date('2025-10-18')
+        updatedAt: new Date('2025-10-18'),
+        coordinates: [-6.279482, 106.7493168]
     },
     {
         id: 'task-56',
@@ -882,7 +934,8 @@ const baseMockTasks: Omit<Task, 'budgetTotal' | 'budgetAbsorbed'>[] = [
         stage: 'handover',
         sprint: 'sprint-1',
         createdAt: new Date('2025-10-17'),
-        updatedAt: new Date('2025-10-19')
+        updatedAt: new Date('2025-10-19'),
+        coordinates: [-7.2181856, 107.8625108]
     },
     {
         id: 'task-57',
@@ -893,7 +946,8 @@ const baseMockTasks: Omit<Task, 'budgetTotal' | 'budgetAbsorbed'>[] = [
         stage: 'done',
         sprint: 'sprint-1',
         createdAt: new Date('2025-10-18'),
-        updatedAt: new Date('2025-10-20')
+        updatedAt: new Date('2025-10-20'),
+        coordinates: [-6.9461761, 109.5532458]
     },
     {
         id: 'task-58',
@@ -904,7 +958,8 @@ const baseMockTasks: Omit<Task, 'budgetTotal' | 'budgetAbsorbed'>[] = [
         stage: 'backlog',
         sprint: 'sprint-1',
         createdAt: new Date('2025-10-19'),
-        updatedAt: new Date('2025-10-19')
+        updatedAt: new Date('2025-10-19'),
+        coordinates: [-7.9613078, 110.5070052]
     },
     {
         id: 'task-59',
@@ -915,7 +970,8 @@ const baseMockTasks: Omit<Task, 'budgetTotal' | 'budgetAbsorbed'>[] = [
         stage: 'procurement',
         sprint: 'sprint-1',
         createdAt: new Date('2025-10-20'),
-        updatedAt: new Date('2025-10-22')
+        updatedAt: new Date('2025-10-22'),
+        coordinates: [-7.823091, 111.995224]
     },
     {
         id: 'task-60',
@@ -926,7 +982,8 @@ const baseMockTasks: Omit<Task, 'budgetTotal' | 'budgetAbsorbed'>[] = [
         stage: 'construction',
         sprint: 'sprint-1',
         createdAt: new Date('2025-10-21'),
-        updatedAt: new Date('2025-10-23')
+        updatedAt: new Date('2025-10-23'),
+        coordinates: [-6.3597298, 106.209534]
     },
     {
         id: 'task-61',
@@ -937,7 +994,8 @@ const baseMockTasks: Omit<Task, 'budgetTotal' | 'budgetAbsorbed'>[] = [
         stage: 'construction-verification',
         sprint: 'sprint-1',
         createdAt: new Date('2025-10-22'),
-        updatedAt: new Date('2025-10-24')
+        updatedAt: new Date('2025-10-24'),
+        coordinates: [5.1999445, 96.6857407]
     },
     {
         id: 'task-62',
@@ -948,7 +1006,8 @@ const baseMockTasks: Omit<Task, 'budgetTotal' | 'budgetAbsorbed'>[] = [
         stage: 'handover',
         sprint: 'sprint-1',
         createdAt: new Date('2025-10-23'),
-        updatedAt: new Date('2025-10-25')
+        updatedAt: new Date('2025-10-25'),
+        coordinates: [5.2013948, 95.4074556]
     },
     {
         id: 'task-63',
@@ -959,7 +1018,8 @@ const baseMockTasks: Omit<Task, 'budgetTotal' | 'budgetAbsorbed'>[] = [
         stage: 'done',
         sprint: 'sprint-1',
         createdAt: new Date('2025-10-24'),
-        updatedAt: new Date('2025-10-25')
+        updatedAt: new Date('2025-10-26'),
+        coordinates: [-0.8133358, 100.6399026]
     },
     {
         id: 'task-64',
@@ -969,8 +1029,9 @@ const baseMockTasks: Omit<Task, 'budgetTotal' | 'budgetAbsorbed'>[] = [
         creator: 'Maya Paramitha',
         stage: 'backlog',
         sprint: 'sprint-1',
-        createdAt: new Date('2025-10-01'),
-        updatedAt: new Date('2025-10-01')
+        createdAt: new Date('2025-10-25'),
+        updatedAt: new Date('2025-10-26'),
+        coordinates: [-0.3667305, 102.4382384]
     },
     {
         id: 'task-65',
@@ -981,7 +1042,8 @@ const baseMockTasks: Omit<Task, 'budgetTotal' | 'budgetAbsorbed'>[] = [
         stage: 'procurement',
         sprint: 'sprint-1',
         createdAt: new Date('2025-10-02'),
-        updatedAt: new Date('2025-10-03')
+        updatedAt: new Date('2025-10-03'),
+        coordinates: [-2.2651204, 102.502355]
     },
     {
         id: 'task-66',
@@ -992,7 +1054,8 @@ const baseMockTasks: Omit<Task, 'budgetTotal' | 'budgetAbsorbed'>[] = [
         stage: 'construction',
         sprint: 'sprint-1',
         createdAt: new Date('2025-10-03'),
-        updatedAt: new Date('2025-10-05')
+        updatedAt: new Date('2025-10-05'),
+        coordinates: [-4.0590416, 103.204961]
     },
     {
         id: 'task-67',
@@ -1003,7 +1066,8 @@ const baseMockTasks: Omit<Task, 'budgetTotal' | 'budgetAbsorbed'>[] = [
         stage: 'construction-verification',
         sprint: 'sprint-1',
         createdAt: new Date('2025-10-04'),
-        updatedAt: new Date('2025-10-06')
+        updatedAt: new Date('2025-10-06'),
+        coordinates: [-3.4361843, 102.2025526]
     },
     {
         id: 'task-68',
@@ -1014,7 +1078,8 @@ const baseMockTasks: Omit<Task, 'budgetTotal' | 'budgetAbsorbed'>[] = [
         stage: 'handover',
         sprint: 'sprint-1',
         createdAt: new Date('2025-10-05'),
-        updatedAt: new Date('2025-10-07')
+        updatedAt: new Date('2025-10-07'),
+        coordinates: [-4.8200089, 103.6637708]
     },
     {
         id: 'task-69',
@@ -1025,7 +1090,8 @@ const baseMockTasks: Omit<Task, 'budgetTotal' | 'budgetAbsorbed'>[] = [
         stage: 'done',
         sprint: 'sprint-1',
         createdAt: new Date('2025-10-06'),
-        updatedAt: new Date('2025-10-08')
+        updatedAt: new Date('2025-10-08'),
+        coordinates: [-2.8662789, 108.2771332]
     },
     {
         id: 'task-70',
@@ -1036,7 +1102,8 @@ const baseMockTasks: Omit<Task, 'budgetTotal' | 'budgetAbsorbed'>[] = [
         stage: 'backlog',
         sprint: 'sprint-1',
         createdAt: new Date('2025-10-07'),
-        updatedAt: new Date('2025-10-07')
+        updatedAt: new Date('2025-10-09'),
+        coordinates: [-6.2792191, 106.8120514]
     },
     {
         id: 'task-71',
@@ -1047,7 +1114,8 @@ const baseMockTasks: Omit<Task, 'budgetTotal' | 'budgetAbsorbed'>[] = [
         stage: 'procurement',
         sprint: 'sprint-1',
         createdAt: new Date('2025-10-08'),
-        updatedAt: new Date('2025-10-09')
+        updatedAt: new Date('2025-10-09'),
+        coordinates: [-6.2782562, 106.5647988]
     },
     {
         id: 'task-72',
@@ -1058,7 +1126,8 @@ const baseMockTasks: Omit<Task, 'budgetTotal' | 'budgetAbsorbed'>[] = [
         stage: 'construction',
         sprint: 'sprint-1',
         createdAt: new Date('2025-10-09'),
-        updatedAt: new Date('2025-10-11')
+        updatedAt: new Date('2025-10-11'),
+        coordinates: [-6.7942221, 110.8299732]
     },
     {
         id: 'task-73',
@@ -1069,7 +1138,8 @@ const baseMockTasks: Omit<Task, 'budgetTotal' | 'budgetAbsorbed'>[] = [
         stage: 'construction-verification',
         sprint: 'sprint-1',
         createdAt: new Date('2025-10-10'),
-        updatedAt: new Date('2025-10-12')
+        updatedAt: new Date('2025-10-12'),
+        coordinates: [-7.3884525, 110.2725346]
     },
     {
         id: 'task-74',
@@ -1080,7 +1150,8 @@ const baseMockTasks: Omit<Task, 'budgetTotal' | 'budgetAbsorbed'>[] = [
         stage: 'handover',
         sprint: 'sprint-1',
         createdAt: new Date('2025-10-11'),
-        updatedAt: new Date('2025-10-13')
+        updatedAt: new Date('2025-10-13'),
+        coordinates: [-7.7593772, 112.653849]
     },
     {
         id: 'task-75',
@@ -1091,7 +1162,8 @@ const baseMockTasks: Omit<Task, 'budgetTotal' | 'budgetAbsorbed'>[] = [
         stage: 'done',
         sprint: 'sprint-1',
         createdAt: new Date('2025-10-12'),
-        updatedAt: new Date('2025-10-14')
+        updatedAt: new Date('2025-10-14'),
+        coordinates: [-6.1021981, 106.1411677]
     },
     {
         id: 'task-76',
@@ -1102,7 +1174,8 @@ const baseMockTasks: Omit<Task, 'budgetTotal' | 'budgetAbsorbed'>[] = [
         stage: 'backlog',
         sprint: 'sprint-1',
         createdAt: new Date('2025-10-13'),
-        updatedAt: new Date('2025-10-13')
+        updatedAt: new Date('2025-10-13'),
+        coordinates: [5.3662672, 95.9471697]
     },
     {
         id: 'task-77',
@@ -1113,7 +1186,8 @@ const baseMockTasks: Omit<Task, 'budgetTotal' | 'budgetAbsorbed'>[] = [
         stage: 'procurement',
         sprint: 'sprint-1',
         createdAt: new Date('2025-10-14'),
-        updatedAt: new Date('2025-10-16')
+        updatedAt: new Date('2025-10-16'),
+        coordinates: [2.9766636, 99.7897254]
     },
     {
         id: 'task-78',
@@ -1124,7 +1198,8 @@ const baseMockTasks: Omit<Task, 'budgetTotal' | 'budgetAbsorbed'>[] = [
         stage: 'construction',
         sprint: 'sprint-1',
         createdAt: new Date('2025-10-15'),
-        updatedAt: new Date('2025-10-17')
+        updatedAt: new Date('2025-10-17'),
+        coordinates: [-0.6326302, 100.7120448]
     },
     {
         id: 'task-79',
@@ -1136,7 +1211,7 @@ const baseMockTasks: Omit<Task, 'budgetTotal' | 'budgetAbsorbed'>[] = [
         sprint: 'sprint-1',
         createdAt: new Date('2025-10-16'),
         updatedAt: new Date('2025-10-18'),
-        coordinates : [0.2249892, 101.7353552]
+        coordinates: [0.2249892, 101.7353552]
     }
 ];
 
@@ -1146,11 +1221,11 @@ export const mockTasks: Task[] = baseMockTasks.map((t) => {
         budgetTotal: 100_000_000,
         budgetAbsorbed:
             t.stage === 'done' ? 100_000_000 :
-            t.stage === 'handover' ? 90_000_000 :
-            t.stage === 'construction-verification' ? 80_000_000 :
-            t.stage === 'construction' ? 50_000_000 :
-            (t.stage === 'procurement' || t.stage === 'procurement-verification') ? 15_000_000 :
-            0,
+                t.stage === 'handover' ? 90_000_000 :
+                    t.stage === 'construction-verification' ? 80_000_000 :
+                        t.stage === 'construction' ? 50_000_000 :
+                            (t.stage === 'procurement' || t.stage === 'procurement-verification') ? 15_000_000 :
+                                0,
     };
 
     // Force some tasks into over-limit state for demo

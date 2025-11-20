@@ -173,44 +173,52 @@ export default function Overview() {
             byProject[t.project] = byProject[t.project] || [];
             byProject[t.project].push(t);
         });
-        return Object.entries(byProject).map(([project, list]) => {
-            const total = list.length || 1;
-            const done = list.filter(t => t.stage === 'done').length;
-            const progress = (done / total) * 100;
-            const overBudget = list.filter(t => t.budgetAbsorbed > t.budgetTotal).length;
-            const stalled = list.filter(t => (now - t.updatedAt.getTime()) / (1000 * 60 * 60 * 24) > 10).length;
-            const backlogHeavy = list.filter(t => t.stage === 'backlog' || t.stage === 'backlog-verification').length;
-            const score = overBudget * 3 + stalled * 2 + backlogHeavy * 1 + Math.max(0, 50 - progress) / 10;
-            return {
-                project,
-                score: Number(score.toFixed(1)),
-                progress: Number(progress.toFixed(1)),
-                overBudget,
-                stalled,
-                total: list.length,
-            };
-        }).sort((a, b) => b.score - a.score).slice(0, 5);
+        return Object.entries(byProject)
+            .map(([project, list]) => {
+                const total = list.length || 1;
+                const done = list.filter(t => t.stage === 'done').length;
+                const progress = (done / total) * 100;
+                const overBudget = list.filter(t => t.budgetAbsorbed > t.budgetTotal).length;
+                const stalled = list.filter(t => (now - t.updatedAt.getTime()) / (1000 * 60 * 60 * 24) > 10).length;
+                const backlogHeavy = list.filter(t => t.stage === 'backlog' || t.stage === 'backlog-verification').length;
+                const score = overBudget * 3 + stalled * 2 + backlogHeavy * 1 + Math.max(0, 50 - progress) / 10;
+                return {
+                    project,
+                    score: Number(score.toFixed(1)),
+                    progress: Number(progress.toFixed(1)),
+                    overBudget,
+                    stalled,
+                    total: list.length,
+                };
+            })
+            .filter(p => p.total > 0 && p.progress < 100)
+            .sort((a, b) => b.score - a.score)
+            .slice(0, 5);
     })();
 
     const taskAttention = (() => {
         const now = Date.now();
-        return tasks.map(t => {
-            const daysSinceUpdate = Math.floor((now - t.updatedAt.getTime()) / (1000 * 60 * 60 * 24));
-            const stalled = daysSinceUpdate > 10 ? 1 : 0;
-            const overBudget = t.budgetAbsorbed > t.budgetTotal ? 1 : 0;
-            const earlyStage = (t.stage === 'backlog' || t.stage === 'backlog-verification') ? 1 : 0;
-            const score = overBudget * 3 + stalled * 2 + earlyStage * 1;
-            return {
-                id: t.id,
-                title: t.title,
-                project: t.project,
-                province: t.province,
-                stage: t.stage,
-                daysSinceUpdate,
-                overBudget: overBudget === 1,
-                score: Number(score.toFixed(1)),
-            };
-        }).sort((a, b) => b.score - a.score || b.daysSinceUpdate - a.daysSinceUpdate).slice(0, 8);
+        return tasks
+            .filter(t => t.stage !== 'done')
+            .map(t => {
+                const daysSinceUpdate = Math.floor((now - t.updatedAt.getTime()) / (1000 * 60 * 60 * 24));
+                const stalled = daysSinceUpdate > 10 ? 1 : 0;
+                const overBudget = t.budgetAbsorbed > t.budgetTotal ? 1 : 0;
+                const earlyStage = (t.stage === 'backlog' || t.stage === 'backlog-verification') ? 1 : 0;
+                const score = overBudget * 3 + stalled * 2 + earlyStage * 1;
+                return {
+                    id: t.id,
+                    title: t.title,
+                    project: t.project,
+                    province: t.province,
+                    stage: t.stage,
+                    daysSinceUpdate,
+                    overBudget: overBudget === 1,
+                    score: Number(score.toFixed(1)),
+                };
+            })
+            .sort((a, b) => b.score - a.score || b.daysSinceUpdate - a.daysSinceUpdate)
+            .slice(0, 8);
     })();
 
     
@@ -235,7 +243,6 @@ export default function Overview() {
                         </span>
                         <h3 className="text-lg font-semibold text-orange-900 tracking-tight">AI Recommendations</h3>
                     </div>
-                    <span className="text-xs text-orange-700/80">Auto-generated from current indicators and tasks</span>
                 </div>
                 <div className="space-y-6">
                     <div>
