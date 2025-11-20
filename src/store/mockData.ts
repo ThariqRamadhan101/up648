@@ -1215,9 +1215,20 @@ const baseMockTasks: Omit<Task, 'budgetTotal' | 'budgetAbsorbed'>[] = [
     }
 ];
 
+const educationPhotos = [
+    'https://awsimages.detik.net.id/community/media/visual/2025/06/29/melihat-lebih-dekat-sekolah-rakyat-di-sentra-handayani-jaktim-1751179722698_169.jpeg?w=1200',
+    'https://imgsrv2.voi.id/V_goOpZKVBrjrvstp02o-oLXkHQ6xJpx0UTzsn-YwRk/auto/1200/675/sm/1/bG9jYWw6Ly8vcHVibGlzaGVycy80OTI5NDkvMjAyNTA3MDcwOTA4LW1haW4uY3JvcHBlZF8xNzUxODU0MTE2LndlYnA.jpg',
+    'https://img.harianjogja.com/posts/2025/08/04/1223059/sekolah-rakyat-antara.jpg',
+    'https://bgnnews.co.id/assets/berita/original/59142335991-img-20250714-wa0133.jpg',
+    'https://cdn01.metrotvnews.com/dynamic/content/2025/07/15/ba4CzqaD/a_6875db7ce2d77.jpg?w=720',
+    'https://img2.beritasatu.com/cache/beritasatu/480x310-3/2025/07/1751511037-1024x576.webp'
+];
+
 export const mockTasks: Task[] = baseMockTasks.map((t) => {
+    const randomPhoto = educationPhotos[Math.floor(Math.random() * educationPhotos.length)];
     const base: Task = {
         ...t,
+        photo: randomPhoto,
         budgetTotal: 100_000_000,
         budgetAbsorbed:
             t.stage === 'done' ? 100_000_000 :

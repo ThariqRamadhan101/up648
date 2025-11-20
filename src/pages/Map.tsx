@@ -349,6 +349,15 @@ function Map() {
                       color={isFocused ? '#0ea5e9' : 'white'}
                     >
                       <Tooltip permanent={isFocused}>
+                        {task.photo && (
+                          <div className="mb-1 rounded overflow-hidden">
+                            <img
+                              src={task.photo}
+                              alt={task.title}
+                              className="w-40 h-24 object-cover"
+                            />
+                          </div>
+                        )}
                         <div className="font-medium">{task.title}</div>
                         <div className="text-xs text-gray-600">{province?.name}</div>
                         <div className="text-sm space-y-1 mt-1 border-t pt-1">

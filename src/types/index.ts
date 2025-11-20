@@ -21,6 +21,7 @@ export interface Task {
     budgetTotal: number;
     budgetAbsorbed: number;
     coordinates?: [number, number];
+    photo?: string;
     budgetLogs?: Array<{
         at: Date;
         field: 'budgetTotal' | 'budgetAbsorbed';
