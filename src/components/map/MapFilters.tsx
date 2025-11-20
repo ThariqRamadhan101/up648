@@ -2,6 +2,7 @@ import { Fragment } from 'react';
 import { Listbox, Transition } from '@headlessui/react';
 import { useTaskFilters } from '../../store/hooks';
 import { cn } from '../../utils/cn';
+import type { KanbanStage } from '../../types';
 
 export const overlayOptions = [
     { id: 'icor2024', name: 'ICOR 2024' },
@@ -19,6 +20,17 @@ export const overlayOptions = [
 
 export function MapFilters() {
     const { filters, setFilter, resetFilters, projects, provinces } = useTaskFilters();
+
+    const stageOptions: { id: KanbanStage; name: string }[] = [
+        { id: 'backlog', name: 'Backlog' },
+        { id: 'backlog-verification', name: 'Backlog Verification' },
+        { id: 'procurement', name: 'Procurement' },
+        { id: 'procurement-verification', name: 'Procurement Verification' },
+        { id: 'construction', name: 'Construction' },
+        { id: 'construction-verification', name: 'Construction Verification' },
+        { id: 'handover', name: 'Handover' },
+        { id: 'done', name: 'Done' },
+    ];
 
     return (
         <div className="p-4">
@@ -72,6 +84,58 @@ export function MapFilters() {
                                 </Listbox.Options>
                             </Transition>
                         </div>
+
+                {/* Stage Filter */}
+                <div>
+                    <Listbox value={filters.stage ?? null} onChange={(v) => setFilter('stage', v)}>
+                        <div className="relative">
+                            <Listbox.Label className="block text-sm font-medium text-gray-700 mb-1.5">
+                                Stage
+                            </Listbox.Label>
+                            <Listbox.Button className="relative w-full cursor-pointer rounded-lg bg-white py-2 pl-3 pr-10 text-left border hover:border-orange-300 focus:outline-none focus-visible:border-orange-500 focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75 focus-visible:ring-offset-2 focus-visible:ring-offset-orange-300 sm:text-sm">
+                                <span className="block truncate">
+                                    {filters.stage
+                                        ? stageOptions.find(s => s.id === filters.stage)?.name || filters.stage
+                                        : 'All Stages'}
+                                </span>
+                            </Listbox.Button>
+                            <Transition
+                                as={Fragment}
+                                leave="transition ease-in duration-100"
+                                leaveFrom="opacity-100"
+                                leaveTo="opacity-0"
+                            >
+                                <Listbox.Options className="absolute mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm z-10">
+                                    <Listbox.Option
+                                        value={null}
+                                        className={({ active }) =>
+                                            cn(
+                                                'relative cursor-default select-none py-2 pl-10 pr-4',
+                                                active ? 'bg-orange-50 text-orange-900' : 'text-gray-900'
+                                            )
+                                        }
+                                    >
+                                        All Stages
+                                    </Listbox.Option>
+                                    {stageOptions.map((stage) => (
+                                        <Listbox.Option
+                                            key={stage.id}
+                                            value={stage.id}
+                                            className={({ active }) =>
+                                                cn(
+                                                    'relative cursor-default select-none py-2 pl-10 pr-4',
+                                                    active ? 'bg-orange-50 text-orange-900' : 'text-gray-900'
+                                                )
+                                            }
+                                        >
+                                            {stage.name}
+                                        </Listbox.Option>
+                                    ))}
+                                </Listbox.Options>
+                            </Transition>
+                        </div>
+                    </Listbox>
+                </div>
                     </Listbox>
                 </div>
 

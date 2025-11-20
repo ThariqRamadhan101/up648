@@ -5,33 +5,52 @@ Modern dashboard to track provincial infrastructure projects, task progress, and
 ## Overview
 
 This app provides:
-- AI-inspired summaries of projects and provinces needing attention.
-- Indicator summary cards linking to detailed charts (GDP, Unemployment, Poverty, Infrastructure, etc.).
-- Task board details with a rich Task Modal for budget and construction updates.
+- Interactive **Kanban board** for project stages (Backlog → Done).
+- Province-based **project map** with indicator overlays and CSV export.
+- Overview analytics with indicator summary cards and province charts.
+- Rich Task Modal for budget and construction monitoring updates.
 - Recent budget change logs aggregated across tasks.
 
 ## Key Features
 
+- Task Board (Board page)
+  - Drag-and-drop Kanban columns for stages:
+    - Backlog → Backlog Verification → Procurement → Procurement Verification → Construction → Construction Verification → Handover → Done.
+  - Board-level filters (province, sprint, creator, etc.) powered by Zustand selectors.
+  - Clicking a card opens the Task Modal.
+
 - Task Modal
   - Budget absorption display and quick log input (auto-logged to `budgetLogs`).
-  - Construction Monitoring Update (S-curve related):
-    - Planned vs Actual progress (%), variance badge.
-    - Status (On track/At risk/Delayed).
-    - Key activities, Issues/risks.
+  - Construction Monitoring section (S-curve related):
+    - Planned vs actual progress (%), variance badge.
+    - Status (On track / At risk / Delayed).
+    - Key activities and Issues/risks.
     - Next milestone and expected date.
-    - Evidence file upload.
-  - S-Curve image sections:
+    - Evidence file upload placeholders.
+  - S-curve image areas:
     - Financial Plan and Physical Plan uploads with live preview.
     - Mock SVG preview shown when no image is uploaded.
   - Budget logs list at the bottom of the modal.
   - Scrollable content (max 85vh).
+  - "View on map" button deep-links to the Map page and focuses that task.
+
+- Map Page
+  - Indonesia basemap using **react-leaflet** and OpenStreetMap tiles.
+  - Two marker modes:
+    - **Province markers** sized by number of tasks, colored by indicator or task progress.
+    - **Project markers** at task or province coordinates, colored by task stage.
+  - Filters panel:
+    - Province selector.
+    - Indicator overlays (GDP, Unemployment, Poverty, Infrastructure, Urbanization, Internet, Literacy, Enrollment, Teacher Ratio, ICOR 2024/2025).
+    - Stage filter to show only tasks at specific Kanban stages in Project mode.
+  - CSV export of the currently visible province indicators and task counts.
+  - Deep-link support from the board (`/map?taskId=...`) to zoom and highlight a specific task.
 
 - Overview Page
-  - AI Recommendations (full-width card) for quick insights.
-  - Two-column layout:
-    - Left: Indicator Summary card.
-    - Left: Recent Budget Changes card (Show more/less pagination).
-    - Right: Province Performance Charts stacked vertically.
+  - Indicator Summary card with average values across provinces and quick-scroll shortcuts to charts.
+  - Task statistics by stage (Backlog → Done).
+  - Recent Budget Changes card (auto-logged when budgets are updated, with show more/less pagination).
+  - Province Performance Charts stacked vertically (ICOR, GDP, Unemployment, Poverty, Infrastructure, Urbanization, Internet, Literacy, Enrollment, Teacher Ratio).
 
 ## Tech Stack
 
@@ -54,17 +73,23 @@ This app provides:
 ## Project Structure (highlights)
 
 - `src/pages/Overview.tsx`
-  - AI Recommendations, Indicator Summary, Budget Changes, Charts.
+  - Indicator Summary, budget change aggregation, and province performance charts.
 - `src/components/board/TaskCard.tsx`
   - Compact task display used in boards/lists.
 - `src/components/board/TaskModal.tsx`
-  - Detailed task view. Includes budget absorption update, construction monitoring form, S-curve image areas, and budget logs.
+  - Detailed task view. Includes budget absorption update, construction monitoring form, S-curve image areas, budget logs, and a deep-link button to the Map page.
 - `src/store/store.ts`
   - Zustand store; `updateTask` automatically appends to `budgetLogs` when `budgetTotal` or `budgetAbsorbed` changes (note supported via `budgetNote`).
 - `src/store/mockData.ts`
   - Seeds example tasks, including example `budgetLogs` for demos.
 - `src/types/index.ts`
   - Core types, including `Task` and optional `budgetLogs`.
+ - `src/pages/Board.tsx`
+   - Kanban board with drag-and-drop, using `getFilteredTasks` from the store.
+ - `src/pages/Map.tsx`
+   - Project/Province map with filters, stage-aware project markers, CSV export and deep-link focus.
+ - `src/components/map/MapFilters.tsx`
+   - Controls overlays, province filter, and stage filter for the map.
 
 ## Data & Logging
 
@@ -83,3 +108,4 @@ This app provides:
 - Persist S-curve images and monitoring updates per task.
 - Add filters (province/project) to Budget Changes panel.
 - Collapsible sections and sticky modal header for long content.
+- Backend + AI assistant endpoint (e.g. Google AI Studio / Gemini) to summarize and answer questions about the dashboard data.

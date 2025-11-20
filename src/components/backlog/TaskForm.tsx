@@ -50,7 +50,7 @@ export function TaskForm() {
 
     return (
         <form onSubmit={handleSubmit} className="space-y-4 bg-gray-50 p-4 rounded-lg shadow-sm border">
-            <h3 className="text-lg font-medium text-gray-900">Create New Task</h3>
+            <h3 className="text-lg font-medium text-gray-900">Create New Project</h3>
 
             <div className="space-y-2">
                 <label className="block text-sm font-medium text-gray-700">

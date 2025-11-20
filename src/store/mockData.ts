@@ -274,7 +274,8 @@ const baseMockTasks: Omit<Task, 'budgetTotal' | 'budgetAbsorbed'>[] = [
         stage: 'backlog',
         sprint: 'sprint-1',
         createdAt: new Date('2025-10-15'),
-        updatedAt: new Date('2025-10-15')
+        updatedAt: new Date('2025-10-15'),
+        coordinates: [5.5528423, 95.3130464]
     },
     {
         id: 'task-2',
@@ -285,7 +286,8 @@ const baseMockTasks: Omit<Task, 'budgetTotal' | 'budgetAbsorbed'>[] = [
         stage: 'procurement',
         sprint: 'sprint-1',
         createdAt: new Date('2025-10-10'),
-        updatedAt: new Date('2025-10-20')
+        updatedAt: new Date('2025-10-20'),
+        coordinates: [2.1154, 99.5451]
     },
     {
         id: 'task-3',
@@ -296,7 +298,8 @@ const baseMockTasks: Omit<Task, 'budgetTotal' | 'budgetAbsorbed'>[] = [
         stage: 'construction',
         sprint: 'sprint-1',
         createdAt: new Date('2025-10-12'),
-        updatedAt: new Date('2025-10-22')
+        updatedAt: new Date('2025-10-22'),
+        coordinates: [-0.7399, 100.8]
     },
     {
         id: 'task-4',
@@ -1132,7 +1135,8 @@ const baseMockTasks: Omit<Task, 'budgetTotal' | 'budgetAbsorbed'>[] = [
         stage: 'construction-verification',
         sprint: 'sprint-1',
         createdAt: new Date('2025-10-16'),
-        updatedAt: new Date('2025-10-18')
+        updatedAt: new Date('2025-10-18'),
+        coordinates : [0.2249892, 101.7353552]
     }
 ];
 

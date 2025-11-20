@@ -1,10 +1,10 @@
 import { useMemo, useState, useEffect } from 'react';
-import { MapContainer, TileLayer, CircleMarker, Tooltip, ZoomControl } from 'react-leaflet';
+import { MapContainer, TileLayer, CircleMarker, Tooltip, ZoomControl, useMap } from 'react-leaflet';
 import { useStore } from '../store/store';
-import { provinceCoordinates } from '../data/provinces';
 import { MapFilters } from '../components/map/MapFilters';
 import { DataLegend, LegendItem } from '../components/map/DataLegend';
 import 'leaflet/dist/leaflet.css';
+import { useLocation } from 'react-router-dom';
 
 // Helper Functions
 function calculateProvinceProgress(provinceId: string, tasks: any[]) {
@@ -21,13 +21,41 @@ function getColorByProgress(progress: number) {
   return '#ef4444'; // red-500
 }
 
+function MapFocus({ taskId, tasks, provinces }: { taskId: string | null; tasks: any[]; provinces: any[] }) {
+  const map = useMap();
+
+  useEffect(() => {
+    if (!taskId) return;
+    const task = tasks.find(t => t.id === taskId);
+    if (!task) return;
+    const province = provinces.find(p => p.id === task.province);
+    const coord = task.coordinates || province?.coordinates;
+    if (!coord) return;
+    const [lat, lng] = coord as [number, number];
+    map.setView([lat, lng], 10, { animate: true });
+  }, [taskId, tasks, provinces, map]);
+
+  return null;
+}
+
 function Map() {
   const [isLoading, setIsLoading] = useState(true);
+  const [markerMode, setMarkerMode] = useState<'province' | 'task'>('province');
   const { tasks, provinces, filters } = useStore(state => ({
     tasks: state.getFilteredTasks(),
     provinces: state.provinces,
     filters: state.filters
   }));
+
+  const location = useLocation();
+  const searchParams = useMemo(() => new URLSearchParams(location.search), [location.search]);
+  const focusedTaskId = searchParams.get('taskId');
+
+  useEffect(() => {
+    if (focusedTaskId) {
+      setMarkerMode('task');
+    }
+  }, [focusedTaskId]);
 
   useEffect(() => {
     // Simulate loading delay for smoother transitions
@@ -115,14 +143,15 @@ function Map() {
 
     const interim: Array<{ base: Record<string, string | number>, details: Record<string, string> }> = [];
 
-    Object.entries(provinceCoordinates).forEach(([id]) => {
+    provinces.forEach((province) => {
+      const id = province.id;
+      if (filters.province && filters.province !== id) return;
       const { value, details } = getIndicatorDetails(id);
-      const province = provinces.find(p => p.id === id);
       const tasksCount = tasks.filter(task => task.province === id).length;
 
       const base = {
         provinceId: id,
-        provinceName: province?.name || id,
+        provinceName: province.name,
         tasksCount,
         primaryValue: Number.isFinite(value) ? Number(value.toFixed(2)) : 0,
       } as Record<string, string | number>;
@@ -185,6 +214,25 @@ function Map() {
                 Download CSV
               </button>
             </div>
+            <div className="flex items-center gap-2 mb-3">
+              <span className="text-xs text-gray-500">Markers:</span>
+              <div className="inline-flex rounded-md border overflow-hidden text-xs">
+                <button
+                  type="button"
+                  onClick={() => setMarkerMode('province')}
+                  className={`px-2 py-1 ${markerMode === 'province' ? 'bg-orange-500 text-white' : 'bg-white text-gray-700'}`}
+                >
+                  Province
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setMarkerMode('task')}
+                  className={`px-2 py-1 border-l ${markerMode === 'task' ? 'bg-orange-500 text-white' : 'bg-white text-gray-700'}`}
+                >
+                  Project
+                </button>
+              </div>
+            </div>
             <DataLegend title="Progress Scale">
               <div className="space-y-1.5">
                 <LegendItem color="#ef4444" label="0-25%" />
@@ -217,45 +265,108 @@ function Map() {
             maxZoom={10}
             minZoom={4}
           >
+            <MapFocus taskId={focusedTaskId} tasks={tasks} provinces={provinces} />
             <TileLayer
               attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
               url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
             />
             <ZoomControl position="bottomright" />
 
-            {Object.entries(provinceCoordinates).map(([id, coordinates]) => {
-              const details = getIndicatorDetails(id);
-              const provinceTasks = tasks.filter(task => task.province === id);
-              const province = provinces.find(p => p.id === id);
+            {markerMode === 'province' && (
+              <>
+                {provinces.map(province => {
+                  if (filters.province && filters.province !== province.id) return null;
+                  const [lat, lng] = province.coordinates;
+                  const details = getIndicatorDetails(province.id);
+                  const provinceTasks = tasks.filter(task => task.province === province.id);
 
-              return (
-                <CircleMarker
-                  key={id}
-                  center={coordinates as [number, number]}
-                  radius={10 + (provinceTasks.length * 2)}
-                  fillColor={getColorByProgress(details.value)}
-                  fillOpacity={0.7}
-                  weight={2}
-                  color="white"
-                >
-                  <Tooltip permanent={false}>
-                    <div className="font-medium">{province?.name}</div>
-                    <div className="text-sm space-y-1 mt-1 border-t pt-1">
-                      {Object.entries(details.details).map(([label, value]) => (
-                        <div key={label} className="flex justify-between gap-2">
-                          <span>{label}:</span>
-                          <span className="font-medium">{value}</span>
+                  return (
+                    <CircleMarker
+                      key={province.id}
+                      center={[lat, lng]}
+                      radius={10 + (provinceTasks.length * 2)}
+                      fillColor={getColorByProgress(details.value)}
+                      fillOpacity={0.7}
+                      weight={2}
+                      color="white"
+                    >
+                      <Tooltip permanent={false}>
+                        <div className="font-medium">{province.name}</div>
+                        <div className="text-sm space-y-1 mt-1 border-t pt-1">
+                          {Object.entries(details.details).map(([label, value]) => (
+                            <div key={label} className="flex justify-between gap-2">
+                              <span>{label}:</span>
+                              <span className="font-medium">{value}</span>
+                            </div>
+                          ))}
+                          <div className="flex justify-between gap-2">
+                            <span>Tasks:</span>
+                            <span className="font-medium">{provinceTasks.length}</span>
+                          </div>
                         </div>
-                      ))}
-                      <div className="flex justify-between gap-2">
-                        <span>Tasks:</span>
-                        <span className="font-medium">{provinceTasks.length}</span>
-                      </div>
-                    </div>
-                  </Tooltip>
-                </CircleMarker>
-              );
-            })}
+                      </Tooltip>
+                    </CircleMarker>
+                  );
+                })}
+              </>
+            )}
+
+            {markerMode === 'task' && (
+              <>
+                {tasks.map(task => {
+                  if (filters.province && filters.province !== task.province) return null;
+
+                  const province = provinces.find(p => p.id === task.province);
+                  const coord = task.coordinates || province?.coordinates;
+                  if (!coord || !province) return null;
+
+                  const [lat, lng] = coord as [number, number];
+
+                  const taskProgress = (() => {
+                    switch (task.stage) {
+                      case 'done': return 100;
+                      case 'handover': return 90;
+                      case 'construction-verification': return 80;
+                      case 'construction': return 60;
+                      case 'procurement-verification': return 40;
+                      case 'procurement': return 30;
+                      case 'backlog-verification': return 20;
+                      case 'backlog': return 10;
+                      default: return 0;
+                    }
+                  })();
+
+                  const isFocused = focusedTaskId === task.id;
+
+                  return (
+                    <CircleMarker
+                      key={task.id}
+                      center={[lat, lng]}
+                      radius={isFocused ? 12 : 8}
+                      fillColor={getColorByProgress(taskProgress)}
+                      fillOpacity={isFocused ? 0.9 : 0.7}
+                      weight={isFocused ? 3 : 2}
+                      color={isFocused ? '#0ea5e9' : 'white'}
+                    >
+                      <Tooltip permanent={isFocused}>
+                        <div className="font-medium">{task.title}</div>
+                        <div className="text-xs text-gray-600">{province?.name}</div>
+                        <div className="text-sm space-y-1 mt-1 border-t pt-1">
+                          <div className="flex justify-between gap-2">
+                            <span>Project:</span>
+                            <span className="font-medium">{task.project}</span>
+                          </div>
+                          <div className="flex justify-between gap-2">
+                            <span>Stage:</span>
+                            <span className="font-medium">{task.stage}</span>
+                          </div>
+                        </div>
+                      </Tooltip>
+                    </CircleMarker>
+                  );
+                })}
+              </>
+            )}
           </MapContainer>
         </div>
       </div>

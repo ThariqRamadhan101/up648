@@ -284,7 +284,6 @@ export default function Overview() {
                 </div>
             </div>
 
-
             {/* Task Overview */}
             <div className="bg-white p-6 rounded-lg border shadow-sm w-full">
                 <h3 className="text-lg font-medium text-gray-900 mb-4">Task Overview</h3>

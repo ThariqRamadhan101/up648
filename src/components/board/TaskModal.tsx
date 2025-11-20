@@ -2,6 +2,7 @@ import { useMemo, useState } from 'react';
 import type { Task } from '../../types';
 import { cn } from '../../utils/cn';
 import { useStore } from '../../store/store';
+import { Link } from 'react-router-dom';
 
 interface TaskModalProps {
     task: Task;
@@ -77,8 +78,15 @@ export function TaskModal({ task, onClose }: TaskModalProps) {
                         <div className="mt-1 text-sm text-gray-500">
                             {task.project} • {task.province} • {task.sprint}
                         </div>
-
-               
+                        <div className="mt-2">
+                            <Link
+                                to={`/map?taskId=${encodeURIComponent(task.id)}`}
+                                className="inline-flex items-center gap-1 px-2 py-1 rounded border border-blue-200 bg-blue-50 text-xs text-blue-700 hover:bg-blue-100 hover:border-blue-300"
+                            >
+                                <span className="inline-block w-3 h-3 rounded-full bg-blue-500" />
+                                <span>View on map</span>
+                            </Link>
+                        </div>
                     </div>
                     <button
                         className="text-gray-500 hover:text-gray-700 p-2 rounded hover:bg-gray-100"

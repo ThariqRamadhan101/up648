@@ -20,6 +20,7 @@ export interface Task {
     updatedAt: Date;
     budgetTotal: number;
     budgetAbsorbed: number;
+    coordinates?: [number, number];
     budgetLogs?: Array<{
         at: Date;
         field: 'budgetTotal' | 'budgetAbsorbed';
