@@ -325,39 +325,39 @@ export default function Overview() {
                     <div className="space-y-2">
                         <div className="flex justify-between text-sm">
                             <span className="text-gray-500">Backlog</span>
-                            <span className="font-medium">{taskStats.backlog}</span>
+                            <span className="font-medium pr-2">{taskStats.backlog}</span>
                         </div>
                         <div className="flex justify-between text-sm">
                             <span className="text-gray-500">Backlog Verification</span>
-                            <span className="font-medium">{taskStats.backlogVerification}</span>
+                            <span className="font-medium pr-2">{taskStats.backlogVerification}</span>
                         </div>
                         <div className="flex justify-between text-sm">
                             <span className="text-gray-500">Procurement</span>
-                            <span className="font-medium">{taskStats.procurement}</span>
+                            <span className="font-medium pr-2">{taskStats.procurement}</span>
                         </div>
                     </div>
                     <div className="space-y-2">
                         <div className="flex justify-between text-sm">
                             <span className="text-gray-500">Procurement Verification</span>
-                            <span className="font-medium">{taskStats.procurementVerification}</span>
+                            <span className="font-medium pr-2">{taskStats.procurementVerification}</span>
                         </div>
                         <div className="flex justify-between text-sm">
                             <span className="text-gray-500">Construction</span>
-                            <span className="font-medium">{taskStats.construction}</span>
+                            <span className="font-medium pr-2">{taskStats.construction}</span>
                         </div>
                         <div className="flex justify-between text-sm">
                             <span className="text-gray-500">Construction Verification</span>
-                            <span className="font-medium">{taskStats.constructionVerification}</span>
+                            <span className="font-medium pr-2">{taskStats.constructionVerification}</span>
                         </div>
                     </div>
                     <div className="space-y-2">
                         <div className="flex justify-between text-sm">
                             <span className="text-gray-500">Handover</span>
-                            <span className="font-medium">{taskStats.handover}</span>
+                            <span className="font-medium pr-2">{taskStats.handover}</span>
                         </div>
                         <div className="flex justify-between text-sm">
                             <span className="text-gray-500">Done</span>
-                            <span className="font-medium">{taskStats.done}</span>
+                            <span className="font-medium pr-2">{taskStats.done}</span>
                         </div>
                     </div>
                 </div>
@@ -397,7 +397,7 @@ export default function Overview() {
                                             style={{ width: `${width || 0}%` }}
                                         />
                                     </div>
-                                    <div className="w-10 text-xs text-gray-700 text-right">
+                                    <div className="w-12 text-xs text-gray-700 text-right pr-2">
                                         {count}
                                     </div>
                                 </div>
@@ -441,7 +441,7 @@ export default function Overview() {
                                             style={{ width: `${width || 0}%` }}
                                         />
                                     </div>
-                                    <div className="w-10 text-xs text-gray-700 text-right">
+                                    <div className="w-10 text-xs text-gray-700 text-right pr-6">
                                         {count}
                                     </div>
                                 </div>
